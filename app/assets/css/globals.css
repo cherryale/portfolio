@@ -67,11 +67,6 @@
     color: inherit;
     text-decoration: underline dotted;
     transition: 0.2s color ease-in-out;
-
-    /* &:focus,
-    &:hover {
-      color: var(--color-black);
-    } */
   }
 
   h1,
