@@ -14,27 +14,27 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Web developer & UI designer based in Amsterdam committed to creating digital experiences that are more humand and accessible.',
+            'Web developer & UI designer based in Amsterdam passionate about creating digital experiences that are more human and accessible.',
         },
         { name: 'author', content: 'Cherry Ale' },
         {
           property: 'og:title',
-          content: 'CHERRY ALE - Web Developer & UI Designer',
+          content: 'CHERRY ALE',
         },
         {
           property: 'og:description',
-          content: 'Cherry Ale - Web developer & UI designer.',
+          content: 'Web developer & UI designer based out of Amsterdam.',
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:image', content: '/og-image.png' },
         { name: 'twitter:card', content: 'summary_large_image' },
         {
           name: 'twitter:title',
-          content: 'CHERRY ALE - Web Developer & UI Designer',
+          content: 'CHERRY ALE',
         },
         {
           name: 'twitter:description',
-          content: 'Cherry Ale - Web developer & UI designer.',
+          content: 'Web developer & UI designer.',
         },
         { name: 'twitter:image', content: '/og-image.png' },
       ],
