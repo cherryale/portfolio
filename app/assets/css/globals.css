@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+@theme {
+  --font-family-base: 'Google Sans', sans-serif;
+
+  /* Colors */
+  --color-pink-100: #f5eff0;
+  --color-pink-200: #f5dedf;
+  --color-pink-300: #e29ba1;
+  --color-pink-400: #ed5b75;
+  --color-pink-500: #4a1b21;
+
+  --color-green-100: #a6d36f;
+  --color-green-200: #77994d;
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1520px;
+
+  /* Container Max Widths */
+  --container-2xs: 480px;
+  --container-xs: 600px;
+  --container-sm: 720px;
+  --container-md: 900px;
+  --container-lg: 1440px;
+  --container-xl: 1520px;
+}
+
+:root {
+  /* Fonts */
+  --font-family-base: var(--font-family-base);
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 700;
+}
+
+@layer base {
+  html {
+    min-height: 100%;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-pink-100);
+    box-sizing: border-box;
+    color: var(--color-pink-500);
+    font-family: var(--font-family-base);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100%;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline dotted;
+    transition: 0.2s color ease-in-out;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.15;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 3rem + 2vw, 4rem);
+  }
+
+  h2 {
+    font-size: clamp(3rem, 2.75rem + 1.5vw, 3.5rem);
+  }
+
+  h3 {
+    font-size: clamp(2rem, 1.75rem + 1.25vw, 2.5rem);
+  }
+
+  h4 {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  h5,
+  h6 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  /* Text size utilities */
+  .eyebrow {
+    @apply text-sm;
+    /* font-size: 0.85rem; */
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-semi-bold);
+  }
+}

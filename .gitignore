@@ -93,3 +93,6 @@ sw.*
 
 # Vercel
 .vercel
+
+# VS Code
+.vscode
