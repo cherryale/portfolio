@@ -2,6 +2,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/image'],
   srcDir: 'app/',
+  dir: {
+    public: '../public',
+  },
   app: {
     head: {
       title: 'CHERRY ALE | Web Developer & UI Designer',
@@ -20,7 +23,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:description',
-          content: 'Portfolio of Cherry Ale - Web developer & UI designer.',
+          content: 'Cherry Ale - Web developer & UI designer.',
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:image', content: '/og-image.png' },
@@ -31,12 +34,17 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:description',
-          content: 'Portfolio of Cherry Ale - Web developer & UI designer.',
+          content: 'Cherry Ale - Web developer & UI designer.',
         },
         { name: 'twitter:image', content: '/og-image.png' },
       ],
       link: [
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon.png' },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '32x32',
+          href: '/favicon.png',
+        },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon.png' },
         {
           rel: 'stylesheet',
