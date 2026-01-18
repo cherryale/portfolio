@@ -24,7 +24,7 @@ definePageMeta({
       <br />
       <p>
         I am Ale, a web developer & UI designer based out of Amsterdam. I strive
-        to create digital experiences that more human and accessible.
+        to create digital experiences that are more human and accessible.
       </p>
       <br />
       <p>
