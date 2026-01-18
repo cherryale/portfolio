@@ -9,7 +9,9 @@ definePageMeta({
 })
 </script>
 <template>
-  <div class="flex flex-col gap-10 min-h-screen items-center justify-center">
+  <div
+    class="flex flex-col gap-10 h-full items-center justify-center py-24 px-4"
+  >
     <div class="max-w-xs text-center text-2xl">
       <img
         src="../assets/images/svg/logo.svg"
@@ -30,7 +32,9 @@ definePageMeta({
         collaborate or simply want to say hello, shoot me an
         <NuxtLink href="mailto:apizzoccheri@protonmail.com">email</NuxtLink>.
       </p>
-      <div class="flex gap-5 mt-10 justify-center">
+      <div
+        class="flex flex-col md:flex-row gap-5 mt-10 justify-center items-center"
+      >
         <SocialLink href="https://github.com/alecherryy" text="Github">
           <template #icon>
             <Github />

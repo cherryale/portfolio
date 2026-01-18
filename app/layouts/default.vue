@@ -4,7 +4,9 @@ import Header from '~/components/header/header.vue'
 </script>
 
 <template>
-  <Header />
-  <slot />
-  <AvailableForWork />
+  <div class="min-h-screen flex flex-col justify-between">
+    <Header />
+    <slot />
+    <AvailableForWork />
+  </div>
 </template>
