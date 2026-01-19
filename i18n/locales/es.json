@@ -3,7 +3,9 @@
     "welcome": "Welcome"
   },
   "welcome": {
-    "status": "Available for work"
+    "status": "Available for work",
+    "intro": "I am a web developer and UI designer based in Amsterdam.",
+    "tagline": "At the intersection of technology and creativity."
   },
   "meta": {
     "title": "CHERRY ALE | Web Developer & UI Designer",
