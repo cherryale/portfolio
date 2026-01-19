@@ -21,7 +21,12 @@ useHead({
     },
     {
       property: 'og:locale',
-      content: () => locale.value === 'en' ? 'en_US' : locale.value === 'it' ? 'it_IT' : 'es_ES',
+      content: () =>
+        locale.value === 'en'
+          ? 'en_US'
+          : locale.value === 'it'
+            ? 'it_IT'
+            : 'es_ES',
     },
   ],
 })

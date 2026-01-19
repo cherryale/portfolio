@@ -52,7 +52,7 @@ const child = {
           :key="l.code"
           :variants="child"
           @click="selectLocale(l.code)"
-          class="transition-colors text-pink-300 hover:text-pink-400"
+          class="transition-colors text-(--color-brand-300) hover:underline"
         >
           {{ l.code.toUpperCase() }}
         </motion.button>
@@ -60,8 +60,9 @@ const child = {
     </AnimatePresence>
 
     <button
+      @keydown="toggleLanguages(true)"
       @mouseenter="toggleLanguages(true)"
-      class="h-10 w-10 flex items-center justify-center rounded-full border border-pink-400 uppercase text-pink-500 font-bold transition hover:bg-pink-100"
+      class="h-10 w-10 flex items-center justify-center rounded-full border border-(--color-brand-300) uppercase text-(--color-brand-500) font-bold transition hover:bg-(--color-brand-100)"
     >
       {{ locale.toUpperCase() }}
     </button>
