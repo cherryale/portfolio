@@ -19,6 +19,10 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@nuxt/image": "^2.0.0"
+    "@morev/vue-transitions": "^3.0.5",
+    "@nuxt/image": "^2.0.0",
+    "@nuxtjs/i18n": "^10.2.1",
+    "@vueuse/motion": "^3.0.3",
+    "motion-v": "^1.9.0"
   }
 }

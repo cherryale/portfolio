@@ -1,9 +1,35 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/image'],
-  srcDir: 'app/',
-  dir: {
-    public: '../public',
+  modules: ['@nuxt/image', '@nuxtjs/i18n', 'motion-v/nuxt'],
+  i18n: {
+    langDir: 'locales/',
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English',
+        file: 'en.json',
+      },
+      {
+        code: 'it',
+        iso: 'it-IT',
+        name: 'Italiano',
+        file: 'it.json',
+      },
+      {
+        code: 'es',
+        iso: 'es-ES',
+        name: 'Español',
+        file: 'es.json',
+      },
+    ],
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
   },
   app: {
     head: {

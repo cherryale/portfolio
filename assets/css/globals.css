@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 
 @theme {
-  --font-family-base: 'Google Sans', sans-serif;
+  --font-family-base: 'Lexend Deca', sans-serif;
 
   /* Colors */
   --color-pink-100: #f5eff0;
@@ -39,6 +39,10 @@
   /* Font weights */
   --font-weight-regular: 400;
   --font-weight-semi-bold: 700;
+
+  --color-background: var(--color-pink-100);
+  --color-foreground: var(--color-pink-500);
+  --color-accent: var(--color-pink-400);
 }
 
 @layer base {
@@ -104,15 +108,39 @@
   h6 {
     text-transform: uppercase;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 @layer utilities {
   /* Text size utilities */
+  .text-outline {
+    color: var(--color-background);
+
+    font-weight: 700;
+    text-shadow:
+      -1px -1px 0 var(--color-foreground),
+      1px -1px 0 var(--color-foreground),
+      -1px 1px 0 var(--color-foreground),
+      1px 1px 0 var(--color-foreground);
+
+    em {
+      color: var(--color-accent);
+      text-shadow:
+        -1px -1px 0 var(--color-accent),
+        1px -1px 0 var(--color-accent),
+        -1px 1px 0 var(--color-accent),
+        1px 1px 0 var(--color-accent);
+    }
+  }
+
   .eyebrow {
     @apply text-sm;
     /* font-size: 0.85rem; */
     line-height: 1;
     text-transform: uppercase;
-    font-weight: var(--font-weight-semi-bold);
+    font-weight: 700;
   }
 }
