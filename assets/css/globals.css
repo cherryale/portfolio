@@ -1,0 +1,179 @@
+@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+@theme {
+  --font-family-base: 'Lexend Deca', sans-serif;
+
+  /* ===================================
+  BRANDING COLORS
+  ==================================
+  This website supports 3 theme variants (pink, blue and lilac); each variant
+  has a light and dark mode */
+
+  /* Default variant - Pink (Light mode) */
+  --color-pink-100: #f5eff0;
+  --color-pink-200: #efcdcf;
+  --color-pink-300: #ed556a;
+  --color-pink-400: #b14b58;
+  --color-pink-500: #831c2e;
+
+  /* Default variant - Pink (Dark mode) */
+  --color-red-100: #e8acb1;
+  --color-red-200: #de7581;
+  --color-red-300: #be2e46;
+  --color-red-400: #4c0c17;
+  --color-red-500: #22090c;
+
+  /* CONSTANT COLORS */
+  /* Stay the same across theme variant and dark/light mode */
+  --color-accent: #ed5b75;
+
+  --color-green-100: #cdd7c0;
+  --color-green-200: #a6d36f;
+  --color-green-300: #709049;
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1520px;
+
+  /* Container Max Widths */
+  --container-2xs: 480px;
+  --container-xs: 600px;
+  --container-sm: 720px;
+  --container-md: 900px;
+  --container-lg: 1440px;
+  --container-xl: 1520px;
+}
+
+:root {
+  /* Fonts */
+  --font-family-base: var(--font-family-base);
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 700;
+
+  /* Default theme: Light Mode (Pink) */
+  --color-background: var(--color-pink-100);
+  --color-foreground: var(--color-pink-500);
+
+  --color-brand-100: var(--color-pink-100);
+  --color-brand-200: var(--color-pink-200);
+  --color-brand-300: var(--color-pink-300);
+  --color-brand-400: var(--color-pink-400);
+  --color-brand-500: var(--color-pink-500);
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  --color-background: var(--color-red-500);
+  --color-foreground: var(--color-red-100);
+
+  --color-brand-100: var(--color-red-500);
+  --color-brand-200: var(--color-red-400);
+  --color-brand-300: var(--color-red-300);
+  --color-brand-400: var(--color-red-200);
+  --color-brand-500: var(--color-red-100);
+}
+
+@layer base {
+  html {
+    min-height: 100%;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  * {
+    transition:
+      background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out,
+      fill 0.3s ease-in-out,
+      stroke 0.3s ease-in-out;
+  }
+
+  body {
+    background-color: var(--color-background);
+    box-sizing: border-box;
+    color: var(--color-foreground);
+    font-family: var(--font-family-base);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100%;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: var(--color-brand-accent);
+    text-decoration: underline dotted;
+    transition: 0.2s color ease-in-out;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.15;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 3rem + 2vw, 4rem);
+  }
+
+  h2 {
+    font-size: clamp(3rem, 2.75rem + 1.5vw, 3.5rem);
+  }
+
+  h3 {
+    font-size: clamp(2rem, 1.75rem + 1.25vw, 2.5rem);
+  }
+
+  h4 {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  h5,
+  h6 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    text-transform: uppercase;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  /* Text size utilities */
+  .screenreaders-only {
+    @apply absolute w-[1px] h-[1px] p-0 overflow-hidden border-none;
+
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .eyebrow {
+    @apply text-sm;
+    /* font-size: 0.85rem; */
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+}
