@@ -5,7 +5,7 @@ useHead({
   htmlAttrs: {
     lang: locale.value,
   },
-  title: () => t('meta.title'),
+  title: () => 'CHERRY ALE | ' + t('meta.title'),
   meta: [
     {
       name: 'description',
