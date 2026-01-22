@@ -30,4 +30,15 @@ const emphasisClass = 'text-accent font-bold'
     </div>
   </Container>
   <AvailableForWork />
+  <div class="absolute z-2 bottom-10 right-10">
+    <ContactMe
+      :size="'default'"
+      :text="'Hire me'"
+      :colors="{
+        slash: 'var(--color-cherry-300)',
+        arrow: 'var(--color-cherry-400)',
+        text: 'text-accent',
+      }"
+    />
+  </div>
 </template>

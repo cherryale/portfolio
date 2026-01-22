@@ -32,3 +32,58 @@ export const PROJECTS = [
     image: '/png/2140.png',
   },
 ]
+
+export const WORK_EXPERIENCE = [
+  {
+    role: 'Senior frontend developer',
+    company: 'Represent',
+    location: 'Amsterdam, Netherlands',
+    from: '2026',
+    to: 'Now',
+  },
+  {
+    role: 'Frontend engineer',
+    company: 'Secfi',
+    location: 'Amsterdam, Netherlands',
+    from: '2022',
+    to: '2025',
+  },
+  {
+    role: 'Frontend engineer',
+    company: 'Dentsu',
+    location: 'Amsterdam, Netherlands',
+    from: '2022',
+    to: '2021',
+  },
+  {
+    role: 'Frontend developer',
+    company: 'Forum One',
+    location: 'Seattle, United States',
+    from: '2018',
+    to: '2021',
+  },
+]
+
+export const EDUCATION = [
+  {
+    role: 'MS in Computer Science & Software Engineering',
+    company: 'Northeastern University',
+    location: 'Seattle, United States',
+    from: '2019',
+    to: '2021',
+  },
+  {
+    role: 'Associate’s Degree in Web Design & Interactive Media',
+    company: 'Art Institute of Seattle',
+    location: 'Seattle, United States',
+    from: '2017',
+    to: '2018',
+  },
+  {
+    role: 'BA in Business Administration and Management',
+    company: 'Florida Atlantic University',
+    location: 'Boca Raton, United States',
+    from: '2011',
+    to: '2014',
+  },
+]

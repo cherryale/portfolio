@@ -12,8 +12,8 @@ const { t } = useI18n()
         <p class="text-cherry-500 font-medium mb-0">
           {{ t('header.welcome') }}
         </p>
-        <span class="h-4 w-[2px] rounded-sm block bg-cherry-200" />
-        <h1 class="uppercase text-cherry-300 font-light">Cherry Ale</h1>
+        <span class="h-4 w-[2px] rounded-sm block bg-cherry-300" />
+        <h1 class="uppercase text-cherry-400 font-light">Cherry Ale</h1>
       </div>
       <img
         src="../../assets/images/svg/logo.svg"

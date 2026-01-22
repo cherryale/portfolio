@@ -5,7 +5,7 @@
 @theme {
   --color-*: initial;
 
-  --color-cherry-50: #f5eff0;
+  --color-cherry-100: #f5eff0;
   --color-cherry-200: #f0d9db;
   --color-cherry-300: #d9b3b6;
   --color-cherry-400: #b14b58;
@@ -117,6 +117,10 @@
     color: var(--color-accent);
     text-decoration: underline dotted;
     transition: 0.2s color ease-in-out;
+  }
+
+  p + p {
+    margin-top: 1rem;
   }
 
   h1,

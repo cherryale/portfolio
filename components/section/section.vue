@@ -1,20 +1,13 @@
 <script setup lang="ts">
 import classNames from 'classnames'
-import Container from '~/components/container/container.vue'
-defineProps<{
+
+const props = defineProps<{
   bgColor: string
-  titleColor: string
-  title: string
 }>()
 </script>
 
 <template>
-  <section :class="classNames('py-20 flex flex-col items-center', bgColor)">
-    <Container>
-      <h2 :class="classNames('eyebrow mb-10', titleColor)">{{ title }}</h2>
-      <div class="pl-10">
-        <slot />
-      </div>
-    </Container>
+  <section :class="classNames('py-40 flex flex-col gap-40 w-full', bgColor)">
+    <slot />
   </section>
 </template>

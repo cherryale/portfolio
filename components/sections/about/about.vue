@@ -1,29 +1,9 @@
 <script setup lang="ts">
-import Container from '~/components/container/container.vue'
-import SocialLink from '~/components/social-link/social-link.vue'
-import Github from '~/components/svg/icons/github.vue'
-import LinkedIn from '~/components/svg/icons/linkedin.vue'
-import Dribbble from '~/components/svg/icons/dribbble.vue'
 import Pills from '~/components/pills/pills.vue'
 import Section from '~/components/section/section.vue'
-
-const SOCIAL_LINKS = [
-  {
-    title: 'GitHub',
-    url: 'https://github.com/alecherryy',
-    icon: Github,
-  },
-  {
-    title: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/alessiapizzoccheri/',
-    icon: LinkedIn,
-  },
-  {
-    title: 'Dribbble',
-    url: 'https://dribbble.com/alecherryy',
-    icon: Dribbble,
-  },
-]
+import Content from '~/components/content/content.vue'
+import Experience from '~/components/experience/experience.vue'
+import { EDUCATION, WORK_EXPERIENCE } from '~/lib/constants'
 
 const SKILLS = [
   'React/Vue',
@@ -42,11 +22,16 @@ const SKILLS = [
 </script>
 
 <template>
-  <Section
-    :bg-color="'bg-cherry-300'"
-    :title="'Tech Stakc & Skills'"
-    :title-color="'text-cherry-400'"
-  >
-    <Pills :items="SKILLS" />
+  <Section :bg-color="'bg-cherry-300'">
+    <Content
+      :title="'Work Experience & Education'"
+      :title-color="'text-cherry-400'"
+    >
+      <Experience :items="WORK_EXPERIENCE" />
+      <Experience :items="EDUCATION" :class-name="'mt-30'" />
+    </Content>
+    <Content :title="'Tech Stakc & Skills'" :title-color="'text-cherry-400'">
+      <Pills :items="SKILLS" />
+    </Content>
   </Section>
 </template>
