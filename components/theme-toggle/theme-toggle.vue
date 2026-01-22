@@ -2,27 +2,27 @@
 import { ref, onMounted } from 'vue'
 import DarkMode from '~/components/svg/icons/dark-mode.vue'
 import LightMode from '~/components/svg/icons/light-mode.vue'
-import { THEME_COLORS } from '~/lib/theme'
+// import { THEME_COLORS } from '~/lib/theme'
 
 const theme = ref<'light' | 'dark'>('light')
 
-const applyTheme = (value: 'light' | 'dark') => {
-  const colors = THEME_COLORS[value]
-  const html = document.documentElement
+// const applyTheme = (value: 'light' | 'dark') => {
+//   const colors = THEME_COLORS[value]
+//   const html = document.documentElement
 
-  // Set data-theme attribute for compatibility
-  html.setAttribute('data-theme', value)
+//   // Set data-theme attribute for compatibility
+//   html.setAttribute('data-theme', value)
 
-  // Set CSS variables as inline styles for transitions
-  Object.entries(colors).forEach(([key, value]) => {
-    html.style.setProperty(key, value)
-  })
-}
+//   // Set CSS variables as inline styles for transitions
+//   Object.entries(colors).forEach(([key, value]) => {
+//     html.style.setProperty(key, value)
+//   })
+// }
 
 const toggleDark = () => {
   const newValue = theme.value === 'light' ? 'dark' : 'light'
   theme.value = newValue
-  applyTheme(newValue)
+  // applyTheme(newValue)
   localStorage.setItem('theme', newValue)
 }
 
@@ -36,7 +36,7 @@ onMounted(() => {
       ? 'dark'
       : 'light'
   }
-  applyTheme(theme.value)
+  // applyTheme(theme.value)
 })
 </script>
 
@@ -44,7 +44,7 @@ onMounted(() => {
   <div class="flex items-center relative text-xs">
     <button
       @click="toggleDark()"
-      class="h-10 w-10 flex items-center justify-center rounded-full border border-(--color-brand-300)"
+      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-300"
     >
       <LightMode v-if="theme === 'dark'" />
       <DarkMode v-if="theme === 'light'" />
