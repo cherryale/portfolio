@@ -15,21 +15,18 @@ const selectLocale = (code: 'en' | 'it' | 'es') => {
 }
 
 const container = {
-  open: {
-    transition: { staggerChildren: 0.2, staggerDirection: -1 },
+  initial: {
+    transition: { staggerChildren: 0.1, staggerDirection: -1 },
   },
-  closed: {
-    transition: { staggerChildren: 0.2, staggerDirection: -1 },
+  animate: {
+    transition: { staggerChildren: 0.1, staggerDirection: -1 },
+  },
+  exit: {
+    transition: { staggerChildren: 0.1, staggerDirection: -1 },
   },
 }
 
 const child = {
-  initial: { opacity: 0, y: 16, transition: { duration: 0.2 } },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.2 } },
-  exit: { opacity: 0, y: -16, transition: { duration: 0.2 } },
-}
-
-const langAnimationProps = {
   initial: { opacity: 0, y: 16, transition: { duration: 0.2 } },
   animate: { opacity: 1, y: 0, transition: { duration: 0.2 } },
   exit: { opacity: 0, y: -16, transition: { duration: 0.2 } },
@@ -75,7 +72,7 @@ const langAnimationProps = {
       class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-300 uppercase text-cherry-500 font-medium transition relative"
     >
       <AnimatePresence>
-        <motion.span :key="locale" v-bind="langAnimationProps" class="absolute">
+        <motion.span :key="locale" v-bind="child" class="absolute">
           {{ locale.toUpperCase() }}
         </motion.span>
       </AnimatePresence>
