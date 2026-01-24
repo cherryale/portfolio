@@ -8,14 +8,16 @@ defineProps<{
   <NuxtLink
     :href="href"
     target="_blank"
-    class="flex text-base items-center gap-2 no-underline group text-brand-400"
+    class="flex items-center gap-3 no-underline group-hover:no-underline group"
   >
     <div
-      class="h-10 w-10 flex items-center justify-center rounded-full border border-brand-300 group-hover:text-brand-300 group-hover:border-brand-400 transition"
+      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-500/20 text-cherry-400 transition-colors md:group-hover:text-cherry-500 md:group-hover:border-accent"
     >
       <slot name="icon" />
     </div>
-    <div class="font-bold hover:text-brand-300 transition">
+    <div
+      class="text-cherry-400 transition-colors md:group-hover:text-cherry-500"
+    >
       {{ text }}
     </div>
   </NuxtLink>
