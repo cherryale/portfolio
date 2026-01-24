@@ -1,10 +1,10 @@
 import type { EffectComposer } from 'postprocessing'
 import * as Three from 'three'
-import type { TextRenderer } from '~/layers/liquid/components/text-renderer'
-import type LiquidDistortion from '~/layers/liquid/components/liquid-distortion'
-import type { LiquidTexture } from '~/layers/liquid/components/liquid-texture'
+import type { TextRenderer } from '~/layers/liquid/classes/text-renderer'
+import type LiquidDistortion from '~/layers/liquid/classes/liquid-distortion'
+import type { LiquidTexture } from '~/layers/liquid/classes/liquid-texture'
 
-export interface State {
+export interface LiquidState {
   texture: LiquidTexture | null
   animationFrameId: number | null
   renderer: Three.WebGLRenderer | null

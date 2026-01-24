@@ -1,42 +1,20 @@
 import * as THREE from 'three'
 import { Text } from 'troika-three-text'
+import { getCSSVariables } from '~/layers/liquid/lib/helpers'
+import type {
+  BaseTextConfig,
+  InlineLayoutConfig,
+  InlineRun,
+  TextConfig,
+} from '~/layers/liquid/types/text'
 
-export interface TextConfig {
-  text: string
-  color: string
-  position?: { x: number; y: number; z: number }
-  textAlign?: 'left' | 'center' | 'right'
-  anchorX?: 'left' | 'center' | 'right'
-  anchorY?: 'top' | 'middle' | 'bottom'
-  // Optional per-text overrides:
-  fontSize?: number
-  fontUrl?: string
-  lineHeight?: number
-}
-
-export type InlineRun = {
-  text: string
-  color?: string
-  textAlign?: 'left' | 'center' | 'right'
-  indent?: number // ✅ world units; applied only at start of a line
-}
-
-export interface InlineLayoutConfig {
-  position: { x: number; y: number; z: number } // top-left start
-  maxWidth: number // available width in world units
-  fontSize?: number
-  fontUrl?: string
-  lineHeight?: number // multiplier, e.g. 1.05–1.25
-  letterSpacing?: number // optional
-}
-
-const defaults = {
+const defaults: BaseTextConfig = {
   fontSize: 3.5,
   fontWeight: 700,
   lineHeight: 1.05,
-  color: '#831c2e',
-  // Nuxt: MUST be in /public/fonts
-  fontUrl: '/assets/fonts/LexendDeca-Bold.ttf',
+  font: '/assets/fonts/LexendDeca-Bold.ttf',
+  anchorX: 'left',
+  anchorY: 'middle',
 }
 
 function syncText(mesh: Text): Promise<void> {
@@ -73,12 +51,12 @@ export class TextRenderer {
     const textMesh = new Text()
 
     textMesh.text = config.text
-    textMesh.font = config.fontUrl ?? defaults.fontUrl
-    textMesh.fontSize = config.fontSize ?? defaults.fontSize
-    textMesh.color = config.color || defaults.color
-    textMesh.textAlign = config.textAlign || 'left'
-    textMesh.anchorX = config.anchorX || 'left'
-    textMesh.anchorY = config.anchorY || 'middle'
+    textMesh.font = defaults.font
+    textMesh.fontSize = defaults.fontSize
+    ;((textMesh.color = config.color || getCSSVariables('--color-cherry-500')),
+      (textMesh.textAlign = config.textAlign || 'left'))
+    textMesh.anchorX = defaults.anchorX || 'left'
+    textMesh.anchorY = defaults.anchorY || 'middle'
 
     // Typings may not include these props, but Troika supports them:
     // ;(textMesh as any).lineHeight = config.lineHeight ?? defaults.lineHeight
@@ -117,9 +95,9 @@ export class TextRenderer {
     runs: InlineRun[],
     layout: InlineLayoutConfig
   ): Promise<Text[]> {
-    const fontUrl = layout.fontUrl ?? defaults.fontUrl
-    const fontSize = layout.fontSize ?? defaults.fontSize
-    const lineHeight = layout.lineHeight ?? defaults.lineHeight
+    const fontUrl = defaults.font
+    const fontSize = defaults.fontSize
+    const lineHeight = defaults.lineHeight
 
     const startX = layout.position.x
     const startY = layout.position.y
@@ -183,10 +161,9 @@ export class TextRenderer {
           mesh.text = chunk
           mesh.font = fontUrl
           mesh.fontSize = fontSize
-          mesh.color = run.color ?? defaults.color
-
-          // We always lay out left-to-right; we right/center align by shifting the whole line.
-          mesh.textAlign = 'left'
+          ;((mesh.color = run.color ?? getCSSVariables('--color-cherry-500')),
+            // We always lay out left-to-right; we right/center align by shifting the whole line.
+            (mesh.textAlign = 'left'))
           mesh.anchorX = 'left'
           mesh.anchorY = 'top'
           ;(mesh as any).lineHeight = lineHeight

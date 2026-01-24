@@ -1,231 +1,267 @@
+```ts
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import * as THREE from 'three'
+import * as Three from 'three'
 import { EffectComposer, RenderPass, EffectPass } from 'postprocessing'
-import { TextRenderer } from '~/layers/liquid/components/text-renderer'
+import { TextRenderer } from '~/layers/liquid/classes/text-renderer'
 import classNames from 'classnames'
 import { getCSSVariables } from '~/layers/liquid/lib/helpers'
-import { LiquidTexture } from '~/layers/liquid/components/liquid-texture'
-import LiquidDistortion from '~/layers/liquid/components/liquid-distortion'
+import { LiquidTexture } from '~/layers/liquid/classes/liquid-texture'
+import LiquidDistortion from '~/layers/liquid/classes/liquid-distortion'
+
+interface LiquidState {
+  texture: LiquidTexture | null
+  animationFrameId: number | null
+  renderer: Three.WebGLRenderer | null
+  camera: Three.PerspectiveCamera | null
+  scene: Three.Scene | null
+  composer: EffectComposer | null
+  clock: Three.Clock | null
+  distortion: LiquidDistortion | null
+  canvasTexture: Three.CanvasTexture | null
+  textRenderer: TextRenderer | null
+}
 
 const containerRef = ref<HTMLDivElement | null>(null)
-let texture: LiquidTexture | null = null
-let animationFrameId: number | null = null
-let renderer: THREE.WebGLRenderer | null = null
-let camera: THREE.PerspectiveCamera | null = null
-let scene: THREE.Scene | null = null
-let composer: EffectComposer | null = null
-let clock: THREE.Clock | null = null
-let waterEffect: LiquidDistortion | null = null
-let canvasTexture: THREE.CanvasTexture | null = null
-let textRenderer: TextRenderer | null = null
+const state: LiquidState = {
+  texture: null,
+  animationFrameId: null,
+  renderer: null,
+  camera: null,
+  scene: null,
+  composer: null,
+  clock: null,
+  distortion: null,
+  canvasTexture: null,
+  textRenderer: null,
+}
+
+// --- Theme observer state ---
+let themeObserver: MutationObserver | null = null
+let lastBg = ''
 
 const onMouseMove = (e: MouseEvent) => {
-  if (!texture || !containerRef.value) {
-    return
-  }
-
-  const rect = containerRef.value.getBoundingClientRect()
-  const point = {
-    x: (e.clientX - rect.left) / rect.width,
-    y: (e.clientY - rect.top) / rect.height,
-    age: 0,
-    force: 0,
-    vx: 0,
-    vy: 0,
-  }
-  texture.addPoint(point)
-}
-
-const addBackgroundPlane = () => {
-  if (!scene || !camera) return
-
-  const distance = camera.position.z
-  const vFov = (camera.fov * Math.PI) / 180
-  const height = 2 * Math.tan(vFov / 2) * distance
-  const width = height * camera.aspect
-
-  const geometry = new THREE.PlaneGeometry(width, height, 1, 1)
-  const material = new THREE.MeshBasicMaterial({
-    color: 0xf5eff0,
-    transparent: false,
-  })
-  const mesh = new THREE.Mesh(geometry, material)
-  mesh.position.z = 0
-
-  scene.add(mesh)
-}
-
-// ✅ CHANGED: make async and use createInlineText
-const addTextToScene = async () => {
-  if (!scene || !camera) {
-    return
-  }
-
-  textRenderer = new TextRenderer(scene)
-
-  const z = 1
-  const distance = camera.position.z - z
-  const vFov = (camera.fov * Math.PI) / 180
-  const padding = 3 // world units; tweak until distortion never clips
-
-  const viewHeight = 2 * Math.tan(vFov / 2) * distance
-  const viewWidth = viewHeight * camera.aspect
-  const usableWidth = viewWidth - padding * 2
-  const usableHeight = viewHeight - padding * 2
-
-  const startX = -viewWidth / 2 + padding
-  const startY = viewHeight / 2 - padding
-
-  const marginX = 1
-  const marginY = 1
-
-  await textRenderer.createInlineText(
-    [
-      { text: 'I am a' },
-      {
-        text: ' something professional',
-        color: getCSSVariables('--color-accent'),
-      },
-      { text: ' &\n' },
-      { text: 'a casual ' },
-      { text: ' something else', color: getCSSVariables('--color-accent') },
-      { text: '.\n' },
-      { text: 'I do interesting things that are\n', indent: 11 },
-      { text: 'interesting', color: getCSSVariables('--color-accent') },
-      { text: ' and' },
-      { text: ' funny', color: getCSSVariables('--color-accent') },
-      { text: '.\n\n' },
-      { text: 'I am passionate about\n', indent: 11 },
-      { text: 'amazing things', color: getCSSVariables('--color-accent') },
-      { text: ',\n' },
-      {
-        text: 'accessibility',
-        color: getCSSVariables('--color-accent'),
-        textAlign: 'right',
-      },
-      { text: ' and\n', textAlign: 'right' },
-      {
-        text: 'some other tech stuff',
-        color: getCSSVariables('--color-accent'),
-        textAlign: 'right',
-      },
-      { text: '.' },
-    ],
-    {
-      position: {
-        x: -usableWidth / 2 + marginX,
-        y: usableHeight / 2 - marginY,
-        z,
-      },
-      maxWidth: usableWidth - marginX * 2,
-      // fontSize / lineHeight can be omitted to use defaults from TextRenderer
+  if (state.texture && containerRef.value) {
+    const rect = containerRef.value.getBoundingClientRect()
+    const point = {
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+      age: 0,
+      force: 0,
+      vx: 0,
+      vy: 0,
     }
-  )
+    state.texture.addPoint(point)
+  }
+}
+
+// ✅ Text layout
+const addTextToScene = async () => {
+  if (state.scene && state.camera) {
+    const { scene, camera } = state
+
+    // IMPORTANT when re-rendering on theme change:
+    state.textRenderer?.dispose()
+    state.textRenderer = new TextRenderer(scene)
+
+    const z = 1
+    const distance = camera.position.z - z
+    const vFov = (camera.fov * Math.PI) / 180
+    const padding = 3 // world units
+
+    const viewHeight = 2 * Math.tan(vFov / 2) * distance
+    const viewWidth = viewHeight * camera.aspect
+    const usableWidth = viewWidth - padding * 2
+    const usableHeight = viewHeight - padding * 2
+
+    const marginX = 1
+    const marginY = 1
+
+    await state.textRenderer.createInlineText(
+      [
+        { text: 'I am a' },
+        {
+          text: ' something professional',
+          color: getCSSVariables('--color-accent'),
+        },
+        { text: ' &\n' },
+        { text: 'a casual ' },
+        { text: ' something else', color: getCSSVariables('--color-accent') },
+        { text: '.\n' },
+        { text: 'I do interesting things that are\n', indent: 11 },
+        { text: 'interesting', color: getCSSVariables('--color-accent') },
+        { text: ' and' },
+        { text: ' funny', color: getCSSVariables('--color-accent') },
+        { text: '.\n\n' },
+        { text: 'I am passionate about\n', indent: 11 },
+        { text: 'amazing things', color: getCSSVariables('--color-accent') },
+        { text: ',\n' },
+        {
+          text: 'accessibility',
+          color: getCSSVariables('--color-accent'),
+          textAlign: 'right',
+        },
+        { text: ' and\n', textAlign: 'right' },
+        {
+          text: 'some other tech stuff',
+          color: getCSSVariables('--color-accent'),
+          textAlign: 'right',
+        },
+        { text: '.' },
+      ],
+      {
+        position: {
+          x: -usableWidth / 2 + marginX,
+          y: usableHeight / 2 - marginY,
+          z,
+        },
+        maxWidth: usableWidth - marginX * 2,
+      }
+    )
+  }
 }
 
 const initComposer = () => {
-  if (!renderer || !scene || !camera || !texture || !texture.canvas) return
+  const { renderer, scene, camera, texture } = state
+  if (renderer && scene && camera && texture && texture.canvas) {
+    state.composer = new EffectComposer(renderer)
+    const renderPass = new RenderPass(scene, camera)
 
-  composer = new EffectComposer(renderer)
-  const renderPass = new RenderPass(scene, camera)
+    state.canvasTexture = new Three.CanvasTexture(texture.canvas)
+    state.canvasTexture.needsUpdate = true
 
-  canvasTexture = new THREE.CanvasTexture(texture.canvas)
-  canvasTexture.needsUpdate = true
+    state.distortion = new LiquidDistortion(state.canvasTexture)
 
-  waterEffect = new LiquidDistortion(canvasTexture)
+    const waterPass = new EffectPass(camera, state.distortion)
 
-  const waterPass = new EffectPass(camera, waterEffect)
+    renderPass.renderToScreen = false
+    waterPass.renderToScreen = true
 
-  renderPass.renderToScreen = false
-  waterPass.renderToScreen = true
-
-  composer.addPass(renderPass)
-  composer.addPass(waterPass)
+    state.composer.addPass(renderPass)
+    state.composer.addPass(waterPass)
+  }
 }
 
 const render = () => {
-  if (composer && clock) {
-    composer.render(clock.getDelta())
+  if (state.composer && state.clock) {
+    state.composer.render(state.clock.getDelta())
+  }
+}
+
+// --- Theme re-render (MutationObserver solution) ---
+const rerenderTheme = async () => {
+  if (!state.scene || !state.renderer) {
+    return
+  }
+
+  state.renderer.setClearColor(0x000000, 0)
+
+  // Rebuild text so colors update
+  await addTextToScene()
+
+  // Force a frame
+  if (state.composer && state.clock) {
+    state.composer.render(state.clock.getDelta())
+  } else if (state.camera) {
+    state.renderer.render(state.scene, state.camera)
   }
 }
 
 const tick = () => {
   render()
-  if (texture) {
-    texture.update()
+  if (state.texture) {
+    state.texture.update()
   }
-  if (canvasTexture) {
-    canvasTexture.needsUpdate = true
+  if (state.canvasTexture) {
+    state.canvasTexture.needsUpdate = true
   }
-  animationFrameId = requestAnimationFrame(tick)
+  state.animationFrameId = requestAnimationFrame(tick)
 }
 
-// ✅ CHANGED: onMounted async + await addTextToScene()
 onMounted(async () => {
   if (containerRef.value) {
     const rect = containerRef.value.getBoundingClientRect()
 
-    texture = new LiquidTexture({ debug: false })
-    scene = new THREE.Scene()
+    state.texture = new LiquidTexture({ debug: false })
+    state.scene = new Three.Scene()
 
-    renderer = new THREE.WebGLRenderer({
+    state.renderer = new Three.WebGLRenderer({
       antialias: false,
-      alpha: false,
+      alpha: true,
     })
-    renderer.setClearColor(0xf5eff0, 1)
-    renderer.setSize(rect.width, rect.height)
-    renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.domElement.style.height = '100%'
-    renderer.domElement.style.width = '100%'
-    renderer.domElement.style.zIndex = '1'
-    renderer.domElement.style.pointerEvents = 'none'
-    containerRef.value.appendChild(renderer.domElement)
+    // initial color (will be overridden by rerenderTheme)
+    state.renderer.setClearColor(0x000000, 0)
+    state.renderer.setSize(rect.width, rect.height)
+    state.renderer.setPixelRatio(window.devicePixelRatio)
+    state.renderer.domElement.style.height = '100%'
+    state.renderer.domElement.style.width = '100%'
+    state.renderer.domElement.style.zIndex = '1'
+    state.renderer.domElement.style.pointerEvents = 'none'
+    containerRef.value.appendChild(state.renderer.domElement)
 
-    camera = new THREE.PerspectiveCamera(
+    state.camera = new Three.PerspectiveCamera(
       45,
       rect.width / rect.height,
       0.1,
       10000
     )
-    camera.position.z = 50
+    state.camera.position.z = 50
 
-    clock = new THREE.Clock()
-    scene.background = new THREE.Color(0xf5eff0)
+    state.clock = new Three.Clock()
+    // state.scene.background = new Three.Color(0xf5eff0)
 
-    // ✅ await so widths are measured before layout continues
     await addTextToScene()
-
     initComposer()
+
+    // --- Theme observer setup ---
+    lastBg = getCSSVariables('--color-cherry-100')
+    await rerenderTheme()
+
+    themeObserver = new MutationObserver(() => {
+      const nextBg = getCSSVariables('--color-cherry-100')
+      if (nextBg !== lastBg) {
+        lastBg = nextBg
+        rerenderTheme()
+      }
+    })
+
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'style'],
+    })
+
     containerRef.value.addEventListener('mousemove', onMouseMove)
   }
   tick()
 })
 
 onUnmounted(() => {
+  themeObserver?.disconnect()
+  themeObserver = null
+
   if (containerRef.value) {
     containerRef.value.removeEventListener('mousemove', onMouseMove)
   }
-  if (animationFrameId !== null) {
-    cancelAnimationFrame(animationFrameId)
+  if (state.animationFrameId !== null) {
+    cancelAnimationFrame(state.animationFrameId)
   }
 
-  textRenderer?.dispose()
-  if (composer) {
-    composer.dispose()
+  state.textRenderer?.dispose()
+  if (state.composer) {
+    state.composer.dispose()
   }
-  if (scene) {
-    scene.traverse((object: THREE.Object3D) => {
-      if (object instanceof THREE.Mesh) {
+  if (state.scene) {
+    state.scene.traverse((object: Three.Object3D) => {
+      if (object instanceof Three.Mesh) {
         object.geometry?.dispose()
-        if (object.material instanceof THREE.Material) {
+        if (object.material instanceof Three.Material) {
           object.material.dispose()
         }
       }
     })
   }
-  if (renderer) {
-    renderer.dispose()
+  if (state.renderer) {
+    state.renderer.dispose()
   }
 })
 </script>
@@ -242,3 +278,4 @@ onUnmounted(() => {
     "
   />
 </template>
+```

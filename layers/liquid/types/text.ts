@@ -4,15 +4,16 @@ export interface BaseTextConfig {
   fontSize: number
   fontWeight: number
   lineHeight: number
-  color: string
-  textAlign: Alignment
+  // color: string
   font: string
   anchorX: 'left' | 'center' | 'right'
   anchorY: 'top' | 'middle' | 'bottom'
 }
 
-export type TextConfig = Pick<BaseTextConfig, 'color' | 'textAlign'> & {
+export type TextConfig = BaseTextConfig & {
+  color?: string
   text: string
+  textAlign?: Alignment
   position?: { x: number; y: number; z: number }
 }
 
