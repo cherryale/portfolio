@@ -12,7 +12,6 @@ export default WaterEffect
 
 const fragment = `
 uniform sampler2D uTexture;
-#define PI 3.14159265359
 
 void mainUv(inout vec2 uv) {
         vec4 tex = texture2D(uTexture, uv);
