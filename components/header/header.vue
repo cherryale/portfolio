@@ -8,7 +8,7 @@ const { t } = useI18n()
 <template>
   <header class="absolute pt-5 px-5 md:px-10 w-full top-0 left-0 z-2">
     <div class="flex justify-between">
-      <div class="flex items-center gap-2 text-sm">
+      <div class="hidden md:flex items-center gap-2 text-sm">
         <p class="text-cherry-500 font-medium mb-0">
           {{ t('header.welcome') }}
         </p>

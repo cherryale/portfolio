@@ -21,6 +21,11 @@ interface LiquidState {
   textRenderer: TextRenderer | null
 }
 
+interface ThemeState {
+  observer: MutationObserver | null
+  signature: string
+}
+
 const containerRef = ref<HTMLDivElement | null>(null)
 const state: LiquidState = {
   texture: null,
@@ -36,8 +41,10 @@ const state: LiquidState = {
 }
 
 // --- Theme observer state ---
-let themeObserver: MutationObserver | null = null
-let lastThemeSig = ''
+const theme: ThemeState = {
+  observer: null,
+  signature: '',
+}
 
 // ✅ Track all CSS vars that affect your canvas/text colors
 const getThemeSignature = () => {
@@ -219,30 +226,27 @@ onMounted(async () => {
     initComposer()
 
     // --- Theme observer setup ---
-    lastThemeSig = getThemeSignature()
+    theme.signature = getThemeSignature()
     await rerenderTheme()
 
-    const checkTheme = () => {
-      // wait a frame so computed styles reflect the new class
+    theme.observer = new MutationObserver(() =>
       requestAnimationFrame(() => {
         const nextSig = getThemeSignature()
-        if (nextSig !== lastThemeSig) {
-          lastThemeSig = nextSig
+        if (nextSig !== theme.signature) {
+          theme.signature = nextSig
           rerenderTheme()
         }
       })
-    }
-
-    themeObserver = new MutationObserver(checkTheme)
+    )
 
     // Observe both <html> and <body> (covers most theme implementations)
-    themeObserver.observe(document.documentElement, {
+    theme.observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class', 'style', 'data-theme'],
     })
 
     if (document.body) {
-      themeObserver.observe(document.body, {
+      theme.observer.observe(document.body, {
         attributes: true,
         attributeFilter: ['class', 'style', 'data-theme'],
       })
@@ -254,8 +258,8 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  themeObserver?.disconnect()
-  themeObserver = null
+  theme.observer?.disconnect()
+  theme.observer = null
 
   if (containerRef.value) {
     containerRef.value.removeEventListener('mousemove', onMouseMove)

@@ -196,3 +196,11 @@
     font-weight: 500;
   }
 }
+
+.hero-text {
+  @apply text-5xl md:text-7xl font-bold relative;
+
+  strong {
+    @apply text-accent;
+  }
+}
