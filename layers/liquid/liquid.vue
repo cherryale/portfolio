@@ -6,6 +6,7 @@ import { WaterTexture } from '~/layers/liquid/components/water-texture'
 import { WaterEffect } from '~/layers/liquid/components/water-effect'
 import { TextRenderer } from '~/layers/liquid/components/text-renderer'
 import classNames from 'classnames'
+import { getCSSVariables } from '~/layers/liquid/lib/helpers'
 
 const containerRef = ref<HTMLDivElement | null>(null)
 let texture: WaterTexture | null = null
@@ -34,19 +35,16 @@ const onMouseMove = (e: MouseEvent) => {
     vy: 0,
   }
   texture.addPoint(point)
-  // console.log('Mouse move:', point, 'Points:', texture.points.length)
 }
 
 const addBackgroundPlane = () => {
   if (!scene || !camera) return
 
-  // Calculate the view size at z=0
   const distance = camera.position.z
   const vFov = (camera.fov * Math.PI) / 180
   const height = 2 * Math.tan(vFov / 2) * distance
   const width = height * camera.aspect
 
-  // Create a plane that fills the entire view
   const geometry = new THREE.PlaneGeometry(width, height, 1, 1)
   const material = new THREE.MeshBasicMaterial({
     color: 0xf5eff0,
@@ -58,89 +56,72 @@ const addBackgroundPlane = () => {
   scene.add(mesh)
 }
 
-const addTextToScene = () => {
+// ✅ CHANGED: make async and use createInlineText
+const addTextToScene = async () => {
   if (!scene || !camera) {
     return
   }
 
   textRenderer = new TextRenderer(scene)
 
-  const z = 1 // put text in front of background plane at z=0
-
-  // Visible size at this z (relative to camera)
+  const z = 1
   const distance = camera.position.z - z
   const vFov = (camera.fov * Math.PI) / 180
+  const padding = 3 // world units; tweak until distortion never clips
+
   const viewHeight = 2 * Math.tan(vFov / 2) * distance
   const viewWidth = viewHeight * camera.aspect
+  const usableWidth = viewWidth - padding * 2
+  const usableHeight = viewHeight - padding * 2
+
+  const startX = -viewWidth / 2 + padding
+  const startY = viewHeight / 2 - padding
 
   const marginX = 1
   const marginY = 1
 
-  textRenderer.createText({
-    text: 'I am a ',
-    color: '#831c2e',
-    position: {
-      x: -viewWidth / 2 + marginX, // left edge + margin
-      y: viewHeight / 2 - marginY, // top edge - margin
-      z,
-    },
-    textAlign: 'left',
-    anchorX: 'left',
-    anchorY: 'top',
-    // maxWidth: viewWidth - marginX * 2, // optional: wrap within view
-  })
-  textRenderer.createText({
-    text: 'senior web developer',
-    color: '#831c2e',
-    position: {
-      x: -viewWidth / 2 + marginX, // left edge + margin
-      y: viewHeight / 2 - marginY, // top edge - margin
-      z,
-    },
-    textAlign: 'left',
-    anchorX: 'left',
-    anchorY: 'top',
-    // maxWidth: viewWidth - marginX * 2, // optional: wrap within view
-  })
-  textRenderer.createText({
-    text: '&',
-    color: '#831c2e',
-    position: {
-      x: -viewWidth / 2 + marginX, // left edge + margin
-      y: viewHeight / 2 - marginY, // top edge - margin
-      z,
-    },
-    textAlign: 'left',
-    anchorX: 'left',
-    anchorY: 'top',
-    // maxWidth: viewWidth - marginX * 2, // optional: wrap within view
-  })
-  textRenderer.createText({
-    text: ' casual',
-    color: '#831c2e',
-    position: {
-      x: -viewWidth / 2 + marginX, // left edge + margin
-      y: viewHeight / 2 - marginY, // top edge - margin
-      z,
-    },
-    textAlign: 'left',
-    anchorX: 'left',
-    anchorY: 'top',
-    // maxWidth: viewWidth - marginX * 2, // optional: wrap within view
-  })
-  textRenderer.createText({
-    text: 'UI designer',
-    color: '#831c2e',
-    position: {
-      x: -viewWidth / 2 + marginX, // left edge + margin
-      y: viewHeight / 2 - marginY, // top edge - margin
-      z,
-    },
-    textAlign: 'left',
-    anchorX: 'left',
-    anchorY: 'top',
-    // maxWidth: viewWidth - marginX * 2, // optional: wrap within view
-  })
+  await textRenderer.createInlineText(
+    [
+      { text: 'I am a' },
+      {
+        text: ' something professional',
+        color: getCSSVariables('--color-accent'),
+      },
+      { text: ' &\n' },
+      { text: 'a casual ' },
+      { text: ' something else', color: getCSSVariables('--color-accent') },
+      { text: '.\n' },
+      { text: 'I do interesting things that are\n', indent: 11 },
+      { text: 'interesting', color: getCSSVariables('--color-accent') },
+      { text: ' and' },
+      { text: ' funny', color: getCSSVariables('--color-accent') },
+      { text: '.\n\n' },
+      { text: 'I am passionate about\n', indent: 11 },
+      { text: 'amazing things', color: getCSSVariables('--color-accent') },
+      { text: ',\n' },
+      {
+        text: 'accessibility',
+        color: getCSSVariables('--color-accent'),
+        textAlign: 'right',
+      },
+      { text: ' and\n', textAlign: 'right' },
+      {
+        text: 'some other tech stuff',
+        color: getCSSVariables('--color-accent'),
+        textAlign: 'right',
+      },
+      { text: '.' },
+    ],
+    {
+      position: {
+        x: -usableWidth / 2 + marginX,
+        y: usableHeight / 2 - marginY,
+        z,
+      },
+      maxWidth: usableWidth - marginX * 2,
+      // fontSize / lineHeight can be omitted to use defaults from TextRenderer
+    }
+  )
 }
 
 const initComposer = () => {
@@ -149,11 +130,9 @@ const initComposer = () => {
   composer = new EffectComposer(renderer)
   const renderPass = new RenderPass(scene, camera)
 
-  // Create THREE.Texture from the canvas
   canvasTexture = new THREE.CanvasTexture(texture.canvas)
   canvasTexture.needsUpdate = true
 
-  // Create WaterEffect with the texture
   waterEffect = new WaterEffect(canvasTexture)
 
   const waterPass = new EffectPass(camera, waterEffect)
@@ -182,14 +161,12 @@ const tick = () => {
   animationFrameId = requestAnimationFrame(tick)
 }
 
-onMounted(() => {
+// ✅ CHANGED: onMounted async + await addTextToScene()
+onMounted(async () => {
   if (containerRef.value) {
     const rect = containerRef.value.getBoundingClientRect()
 
-    // Initialize WaterTexture
     texture = new WaterTexture({ debug: false })
-
-    // Initialize Three.js
     scene = new THREE.Scene()
 
     renderer = new THREE.WebGLRenderer({
@@ -199,11 +176,8 @@ onMounted(() => {
     renderer.setClearColor(0xf5eff0, 1)
     renderer.setSize(rect.width, rect.height)
     renderer.setPixelRatio(window.devicePixelRatio)
-    // renderer.domElement.style.position = 'absolute'
-    // renderer.domElement.style.top = '0'
-    // renderer.domElement.style.left = '0'
-    // renderer.domElement.style.width = '100%'
-    // renderer.domElement.style.height = '100%'
+    renderer.domElement.style.height = '100%'
+    renderer.domElement.style.width = '100%'
     renderer.domElement.style.zIndex = '1'
     renderer.domElement.style.pointerEvents = 'none'
     containerRef.value.appendChild(renderer.domElement)
@@ -216,36 +190,14 @@ onMounted(() => {
     )
     camera.position.z = 50
 
-    // console.log('Camera position:', camera.position)
-    // console.log('Scene:', scene)
-
-    // Initialize clock
     clock = new THREE.Clock()
-
-    // Set scene background to cherry-100 color (#f5eff0)
     scene.background = new THREE.Color(0xf5eff0)
 
-    // Add text to scene
-    addTextToScene()
+    // ✅ await so widths are measured before layout continues
+    await addTextToScene()
 
-    // Initialize composer
     initComposer()
-
-    // Add event listener
     containerRef.value.addEventListener('mousemove', onMouseMove)
-
-    // Append the water texture canvas for debugging (top-right corner)
-    // if (texture.canvas) {
-    //   texture.canvas.style.position = 'absolute'
-    //   texture.canvas.style.top = '10px'
-    //   texture.canvas.style.right = '10px'
-    //   texture.canvas.style.width = '150px'
-    //   texture.canvas.style.height = '150px'
-    //   texture.canvas.style.border = '2px solid red'
-    //   texture.canvas.style.zIndex = '9999'
-    //   texture.canvas.style.pointerEvents = 'none'
-    //   containerRef.value.appendChild(texture.canvas)
-    // }
   }
   tick()
 })
@@ -258,7 +210,6 @@ onUnmounted(() => {
     cancelAnimationFrame(animationFrameId)
   }
 
-  // Clean up Three.js resources
   textRenderer?.dispose()
   if (composer) {
     composer.dispose()
@@ -278,20 +229,16 @@ onUnmounted(() => {
   }
 })
 </script>
+
 <template>
   <div
     ref="containerRef"
     :class="
       classNames(
-        'min-h-screen max-w-2xl mx-auto px-10 xl:px-20 py-20',
         'flex items-center justify-center',
-        'relative text-6xl lg:text-7xl font-bold'
+        'max-w-2xl w-full mx-auto',
+        'relative min-h-[calc(100vh-10rem)]'
       )
     "
   />
-  <!-- HTML content hidden, rendered in Three.js instead -->
-  <!-- <div style="opacity: 0; pointer-events: none"> -->
-  <!-- <slot /> -->
-  <!-- </div> -->
-  <!-- </div> -->
 </template>

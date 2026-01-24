@@ -139,7 +139,7 @@ export class WaterTexture {
     ctx.shadowColor = `rgba(${color},${0.2 * intensity})`
 
     this.ctx.beginPath()
-    this.ctx.fillStyle = 'rgba(255,0,0,1)'
+    this.ctx.fillStyle = 'rgba(255,255,255,1)'
     // 2. Move the circle to the other direction of the offset
     this.ctx.arc(pos.x - offset, pos.y - offset, radius, 0, Math.PI * 2)
     this.ctx.fill()
