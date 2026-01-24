@@ -18,13 +18,13 @@ interface Point {
   vy: number
 }
 
-interface WaterTextureOptions {
+interface LiquidTextureOptions {
   debug?: boolean
   width?: number
   height?: number
 }
 
-export class WaterTexture {
+export class LiquidTexture {
   size: number = 64
   points: Point[] = []
   maxAge: number = 64
@@ -36,7 +36,7 @@ export class WaterTexture {
   canvas?: HTMLCanvasElement
   ctx!: CanvasRenderingContext2D
 
-  constructor(options: WaterTextureOptions = {}) {
+  constructor(options: LiquidTextureOptions = {}) {
     this.radius = this.size * 0.1
     this.width = this.height = this.size
     this.last = null
@@ -65,7 +65,7 @@ export class WaterTexture {
     }
 
     this.canvas = document.createElement('canvas')
-    this.canvas.id = 'WaterTexture'
+    this.canvas.id = 'LiquidTexture'
     this.canvas.width = this.width
     this.canvas.height = this.height
     this.ctx = this.canvas.getContext('2d')!
@@ -88,7 +88,7 @@ export class WaterTexture {
       vx = relativeX / distance
       vy = relativeY / distance
 
-      force = Math.min(distanceSquared * 10000, 1)
+      force = Math.min(distanceSquared * 5000, 1)
     }
 
     this.last = {
@@ -162,9 +162,12 @@ export class WaterTexture {
     let agePart = 1 / this.maxAge
     this.points.forEach((point, i) => {
       let slowAsOlder = 1 - point.age / this.maxAge
-      let force = (point?.force || 0) * agePart * slowAsOlder
-      point.x += (point.vx || 0) * force
-      point.y += (point.vy || 0) * force
+      let force = point?.force * agePart * slowAsOlder
+
+      const damping = 0.35
+      point.x += point.vx * force * damping
+      point.y += point.vy * force * damping
+
       point.age += 1
       if (point.age > this.maxAge) {
         this.points.splice(i, 1)

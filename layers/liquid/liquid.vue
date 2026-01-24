@@ -2,21 +2,21 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { EffectComposer, RenderPass, EffectPass } from 'postprocessing'
-import { WaterTexture } from '~/layers/liquid/components/water-texture'
-import { WaterEffect } from '~/layers/liquid/components/water-effect'
 import { TextRenderer } from '~/layers/liquid/components/text-renderer'
 import classNames from 'classnames'
 import { getCSSVariables } from '~/layers/liquid/lib/helpers'
+import { LiquidTexture } from '~/layers/liquid/components/liquid-texture'
+import LiquidDistortion from '~/layers/liquid/components/liquid-distortion'
 
 const containerRef = ref<HTMLDivElement | null>(null)
-let texture: WaterTexture | null = null
+let texture: LiquidTexture | null = null
 let animationFrameId: number | null = null
 let renderer: THREE.WebGLRenderer | null = null
 let camera: THREE.PerspectiveCamera | null = null
 let scene: THREE.Scene | null = null
 let composer: EffectComposer | null = null
 let clock: THREE.Clock | null = null
-let waterEffect: WaterEffect | null = null
+let waterEffect: LiquidDistortion | null = null
 let canvasTexture: THREE.CanvasTexture | null = null
 let textRenderer: TextRenderer | null = null
 
@@ -133,7 +133,7 @@ const initComposer = () => {
   canvasTexture = new THREE.CanvasTexture(texture.canvas)
   canvasTexture.needsUpdate = true
 
-  waterEffect = new WaterEffect(canvasTexture)
+  waterEffect = new LiquidDistortion(canvasTexture)
 
   const waterPass = new EffectPass(camera, waterEffect)
 
@@ -166,7 +166,7 @@ onMounted(async () => {
   if (containerRef.value) {
     const rect = containerRef.value.getBoundingClientRect()
 
-    texture = new WaterTexture({ debug: false })
+    texture = new LiquidTexture({ debug: false })
     scene = new THREE.Scene()
 
     renderer = new THREE.WebGLRenderer({
