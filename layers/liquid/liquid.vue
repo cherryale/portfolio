@@ -1,4 +1,3 @@
-```ts
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as Three from 'three'
@@ -38,7 +37,14 @@ const state: LiquidState = {
 
 // --- Theme observer state ---
 let themeObserver: MutationObserver | null = null
-let lastBg = ''
+let lastThemeSig = ''
+
+// ✅ Track all CSS vars that affect your canvas/text colors
+const getThemeSignature = () => {
+  const bg = getCSSVariables('--color-cherry-100')
+  const text = getCSSVariables('--color-cherry-500')
+  return `${bg}|${text}`
+}
 
 const onMouseMove = (e: MouseEvent) => {
   if (state.texture && containerRef.value) {
@@ -154,6 +160,7 @@ const rerenderTheme = async () => {
     return
   }
 
+  // keep canvas transparent
   state.renderer.setClearColor(0x000000, 0)
 
   // Rebuild text so colors update
@@ -189,7 +196,6 @@ onMounted(async () => {
       antialias: false,
       alpha: true,
     })
-    // initial color (will be overridden by rerenderTheme)
     state.renderer.setClearColor(0x000000, 0)
     state.renderer.setSize(rect.width, rect.height)
     state.renderer.setPixelRatio(window.devicePixelRatio)
@@ -208,27 +214,39 @@ onMounted(async () => {
     state.camera.position.z = 50
 
     state.clock = new Three.Clock()
-    // state.scene.background = new Three.Color(0xf5eff0)
 
     await addTextToScene()
     initComposer()
 
     // --- Theme observer setup ---
-    lastBg = getCSSVariables('--color-cherry-100')
+    lastThemeSig = getThemeSignature()
     await rerenderTheme()
 
-    themeObserver = new MutationObserver(() => {
-      const nextBg = getCSSVariables('--color-cherry-100')
-      if (nextBg !== lastBg) {
-        lastBg = nextBg
-        rerenderTheme()
-      }
-    })
+    const checkTheme = () => {
+      // wait a frame so computed styles reflect the new class
+      requestAnimationFrame(() => {
+        const nextSig = getThemeSignature()
+        if (nextSig !== lastThemeSig) {
+          lastThemeSig = nextSig
+          rerenderTheme()
+        }
+      })
+    }
 
+    themeObserver = new MutationObserver(checkTheme)
+
+    // Observe both <html> and <body> (covers most theme implementations)
     themeObserver.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class', 'style'],
+      attributeFilter: ['class', 'style', 'data-theme'],
     })
+
+    if (document.body) {
+      themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme'],
+      })
+    }
 
     containerRef.value.addEventListener('mousemove', onMouseMove)
   }
@@ -278,4 +296,3 @@ onUnmounted(() => {
     "
   />
 </template>
-```
