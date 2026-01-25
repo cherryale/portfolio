@@ -4,6 +4,10 @@ import { ref, onMounted } from 'vue'
 import DarkMode from '~/components/svg/icons/dark-mode.vue'
 import LightMode from '~/components/svg/icons/light-mode.vue'
 
+defineOptions({
+  inheritAttrs: false,
+})
+
 const theme = ref<'light' | 'dark'>('light')
 
 const applyTheme = (value: 'light' | 'dark') => {

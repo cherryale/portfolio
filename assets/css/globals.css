@@ -1,6 +1,28 @@
 @import 'tailwindcss';
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('/assets/fonts/LexendDeca-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('/assets/fonts/LexendDeca-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('/assets/fonts/LexendDeca-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
   --color-*: initial;
@@ -89,6 +111,7 @@
   }
 
   * {
+    box-sizing: border-box;
     transition:
       background-color 0.3s ease-in-out,
       color 0.3s ease-in-out,
@@ -171,5 +194,13 @@
     line-height: 1;
     text-transform: uppercase;
     font-weight: 500;
+  }
+}
+
+.hero-text {
+  @apply text-5xl md:text-7xl font-bold relative;
+
+  strong {
+    @apply text-accent;
   }
 }

@@ -24,12 +24,12 @@ export const PROJECTS = [
   {
     title: 'Norwegian Film Commission',
     url: 'https://www.norwegianfilm.com/',
-    image: '/png/nfc.png',
+    image: '/assets/images/png/nfc.png',
   },
   {
     title: '2140',
     url: 'https://2140.dev',
-    image: '/png/2140.png',
+    image: '/assets/images/png/2140.png',
   },
 ]
 

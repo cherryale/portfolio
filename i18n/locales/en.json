@@ -7,6 +7,10 @@
     "intro": "I am a web developer and UI designer based in Amsterdam.",
     "tagline": "At the intersection of technology and creativity."
   },
+  "hero": {
+    "text_1": "I am a **senior web developer** & casual **UI designer**.\nI work at the intersection of **technology** and **creativity**.",
+    "text_2": "I am passionate about **intuitive interfaces**, **accessibility** & casual **UI designer**."
+  },
   "meta": {
     "title": "Web Developer & UI Designer",
     "description": "Web developer & UI designer based in Amsterdam passionate about creating digital experiences that are more human and accessible.",
