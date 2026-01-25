@@ -35,7 +35,7 @@ const child = {
 
 <template>
   <div
-    class="flex items-center relative text-xs"
+    class="flex items-center text-xs absolute right-5 md:right-10"
     @mouseleave="toggleLanguages(false)"
   >
     <AnimatePresence mode="wait">

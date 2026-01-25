@@ -11,6 +11,7 @@ defineProps<{
     arrow: string
   }
   size: 'default' | 'large'
+  className?: string
 }>()
 </script>
 <template>
@@ -19,7 +20,8 @@ defineProps<{
     :class="
       classNames(
         'flex items-center text-lg font-medium uppercase no-underline',
-        colors.text
+        colors.text,
+        className
       )
     "
   >
