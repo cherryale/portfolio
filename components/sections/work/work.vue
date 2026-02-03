@@ -7,32 +7,34 @@ import Content from '~/components/content/content.vue'
 </script>
 
 <template>
-  <Section :bg-color="'bg-cherry-200'">
-    <Content :title="'My career so far'" :title-color="'text-cherry-400'">
-      <template #description>
+  <Section class="bg-hero-background">
+    <Container class="text-4xl lg:text-5xl font-bold">
+      <div class="lg:pl-10">
         <p>
-          Lorem ipsum dolor sit amet, an possit molestie pri, nec everti alterum
-          necessitatibus ad. Id quas magna vis, zril vocibus liberavisse vix ut,
-          in mundi commodo dolorem duo. Qui ne fugit definiebas. Nec cu alia
-          iuvaret feugait. Ferri deseruisse eu his, vim an virtute instructior.
+          Hello, I am <span class="text-accent">Ale</span>. I am a senior
+          developer with over 7 years of experience building
+          <span class="text-accent">web applications & digital products</span>.
         </p>
-        <p>
-          Copiosae eleifend splendide an mea. Pri errem iudico at, nihil
-          abhorreant dissentiunt at vix. Per nulla lucilius cu, cu justo labitur
-          per.
+        <p class="indent-20 lg:indent-40">
+          I have worked on a variety of projects for small and large brands and
+          organizations. I strive to create
+          <span class="text-accent">modern & intuitive products</span> tailored
+          to each client's need.
         </p>
-      </template>
-      <ul class="flex flex-col md:flex-row gap-5 mt-10">
-        <li v-for="item in SOCIAL_LINKS" :key="item.title">
-          <SocialLink :text="item.title" :href="item.url">
-            <template #icon>
-              <component :is="item.icon" />
-            </template>
-          </SocialLink>
-        </li>
-      </ul>
-    </Content>
-    <Content :title="'Selected work'" :title-color="'text-cherry-400'">
+        <ul class="flex flex-col md:flex-row gap-5 mt-10">
+          <li v-for="item in SOCIAL_LINKS" :key="item.title">
+            <SocialLink :text="item.title" :href="item.url">
+              <template #icon>
+                <component :is="item.icon" />
+              </template>
+            </SocialLink>
+          </li>
+        </ul>
+      </div>
+    </Container>
+  </Section>
+  <Section class="bg-hero-background">
+    <Content :title="'Selected work'">
       <ul class="grid grid-cols-2 gap-2 pt-10">
         <li v-for="item in PROJECTS" :key="item.title">
           <NuxtLink :href="item.url" target="_blank">
@@ -41,23 +43,21 @@ import Content from '~/components/content/content.vue'
         </li>
       </ul>
     </Content>
-    <Content
-      :title="'Do you want to collaborate?'"
-      :title-color="'text-cherry-400'"
-    >
+    <Content :title="'Do you want to collaborate?'">
       <template #description>
-        <p>
-          Lorem ipsum dolor sit amet, an possit molestie pri, nec everti alterum
-          necessitatibus ad. Id quas magna vis.
+        <p class="max-w-xs">
+          I am available for new opportunity // Whether you're looking to build
+          a new website, give your brand a new look or need on-going support, I
+          am here to help! Let's chat.
         </p>
       </template>
       <ContactMe
         :size="'default'"
         :text="'Get in touch'"
         :colors="{
-          slash: 'var(--color-cherry-300)',
-          text: 'text-accent',
-          arrow: 'var(--color-cherry-500)',
+          slash: 'var(--color-cherry-20)',
+          text: 'text-accent-dark',
+          arrow: 'var(--color-cherry-70)',
         }"
       />
     </Content>

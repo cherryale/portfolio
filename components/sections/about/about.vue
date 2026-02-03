@@ -30,7 +30,7 @@ const SKILLS = [
       <Experience :items="WORK_EXPERIENCE" />
       <Experience :items="EDUCATION" :class-name="'mt-30'" />
     </Content>
-    <Content :title="'Tech Stakc & Skills'" :title-color="'text-cherry-400'">
+    <Content :title="'Tech stack & Skills'" :title-color="'text-cherry-400'">
       <Pills :items="SKILLS" />
     </Content>
   </Section>

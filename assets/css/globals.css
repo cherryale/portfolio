@@ -27,11 +27,20 @@
 @theme {
   --color-*: initial;
 
-  --color-cherry-100: #f5eff0;
-  --color-cherry-200: #f0d9db;
-  --color-cherry-300: #d9b3b6;
-  --color-cherry-400: #b14b58;
-  --color-cherry-500: #831c2e;
+  /* CONSTANT COLORS */
+  /* Stay the same across theme variant and dark/light mode */
+  --color-accent: #fe5367;
+  --color-accent-dark: #db5259;
+
+  /* LIGHT MODE */
+  --color-cherry: #831c2e;
+  --color-cherry-10: rgba(131, 28, 46, 0.1);
+  --color-cherry-20: rgba(131, 28, 46, 0.2);
+  --color-cherry-40: rgba(131, 28, 46, 0.4);
+  --color-cherry-70: rgba(131, 28, 46, 0.7);
+
+  --color-foreground: var(--color-cherry);
+  --color-background: #f5eff0;
 
   /* ===================================
   BRANDING COLORS
@@ -40,11 +49,11 @@
   has a light and dark mode */
 
   /* Default variant - Pink (Light mode) */
-  --color-pink-100: #f5eff0;
+  /* --color-pink-100: #f5eff0;
   --color-pink-200: #f0d9db;
   --color-pink-300: #d9b3b6;
   --color-pink-400: #b14b58;
-  --color-pink-500: #831c2e;
+  --color-pink-500: #831c2e; */
 
   /* Default variant - Pink (Dark mode) */
   --color-red-100: #fdd5d9;
@@ -53,9 +62,7 @@
   --color-red-400: #5a051a;
   --color-red-500: #370012;
 
-  /* CONSTANT COLORS */
-  /* Stay the same across theme variant and dark/light mode */
-  --color-accent: #ed5b75;
+  --color-hero-background: #ffabaf;
 
   --color-green-100: #a6d36f;
   --color-green-200: #709049;
@@ -85,13 +92,6 @@
   /* Font weights */
   --font-weight-regular: 400;
   --font-weight-semi-bold: 700;
-
-  /* Default theme: Light Mode (Pink) */
-  --color-cherry-100: var(--color-pink-100);
-  --color-cherry-200: var(--color-pink-200);
-  --color-cherry-300: var(--color-pink-300);
-  --color-cherry-400: var(--color-pink-400);
-  --color-cherry-500: var(--color-pink-500);
 }
 
 /* Dark theme */
@@ -121,9 +121,9 @@
   }
 
   body {
-    background-color: var(--color-cherry-100);
+    background-color: var(--color-background);
     box-sizing: border-box;
-    color: var(--color-cherry-500);
+    color: var(--color-foreground);
     font-family: var(--font-family-base);
     font-size: 16px;
     font-weight: 300;
@@ -189,12 +189,31 @@
 @layer utilities {
   /* Text size utilities */
   .eyebrow {
-    @apply text-sm;
+    @apply text-sm text-cherry-70;
     /* font-size: 0.85rem; */
     line-height: 1;
     text-transform: uppercase;
     font-weight: 500;
   }
+}
+
+@keyframes float {
+  0% {
+    /* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
+    transform: translateY(0);
+  }
+  50% {
+    /* box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2); */
+    transform: translateY(-1rem);
+  }
+  100% {
+    /* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 .hero-text {
