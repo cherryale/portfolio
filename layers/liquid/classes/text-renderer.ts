@@ -9,7 +9,7 @@ import type {
 } from '~/layers/liquid/types/text'
 
 const defaults: BaseTextConfig = {
-  fontSize: 3.5,
+  fontSize: 4.75,
   fontWeight: 700,
   lineHeight: 1.05,
   font: '/assets/fonts/LexendDeca-Bold.ttf',
@@ -19,7 +19,7 @@ const defaults: BaseTextConfig = {
 
 // ✅ theme-aware default color resolver
 const resolveDefaultColor = (): string => {
-  const value = getCSSVariables('--color-cherry-500')
+  const value = getCSSVariables('--color-cherry')
   return value || '#831c2e'
 }
 

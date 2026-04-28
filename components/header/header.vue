@@ -13,7 +13,7 @@ const { t } = useI18n()
         <p class="text-cherry font-bold mb-0">
           {{ t('header.welcome') }}
         </p>
-        <span class="h-4 w-[2px] rounded-sm block bg-cherry-40" />
+        <span class="h-4 w-[2px] rounded-sm block bg-accent" />
         <h1 class="uppercase text-cherry-70 font-light">Cherry Ale</h1>
       </div>
       <Logo />

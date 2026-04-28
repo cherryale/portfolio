@@ -94,33 +94,73 @@ const addTextToScene = async () => {
       [
         { text: 'I am a' },
         {
-          text: ' something professional',
+          text: ' senior web developer',
           color: getCSSVariables('--color-accent'),
         },
-        { text: ' &\n' },
-        { text: 'a casual ' },
-        { text: ' something else', color: getCSSVariables('--color-accent') },
-        { text: '.\n' },
-        { text: 'I do interesting things that are\n', indent: 11 },
-        { text: 'interesting', color: getCSSVariables('--color-accent') },
-        { text: ' and' },
-        { text: ' funny', color: getCSSVariables('--color-accent') },
-        { text: '.\n\n' },
-        { text: 'I am passionate about\n', indent: 11 },
-        { text: 'amazing things', color: getCSSVariables('--color-accent') },
-        { text: ',\n' },
+        { text: ' &\n', color: getCSSVariables('--color-cherry') },
         {
-          text: 'accessibility',
+          text: 'casual UI designer',
           color: getCSSVariables('--color-accent'),
+        },
+        { text: '.\n', color: getCSSVariables('--color-cherry') },
+        {
+          text: 'With over seven years of\n',
           textAlign: 'right',
         },
-        { text: ' and\n', textAlign: 'right' },
         {
-          text: 'some other tech stuff',
+          text: 'experience, I work at the intersection\n',
+        },
+        {
+          text: 'of',
+        },
+        {
+          text: ' technology',
           color: getCSSVariables('--color-accent'),
+        },
+        {
+          text: ' &',
+        },
+        {
+          text: ' creativity',
+          color: getCSSVariables('--color-accent'),
+        },
+        {
+          text: '.\n',
+        },
+        {
+          text: 'I am passionate about',
           textAlign: 'right',
         },
-        { text: '.' },
+        {
+          text: ' intuitive\n',
+          color: getCSSVariables('--color-accent'),
+        },
+        {
+          text: 'interfaces',
+          color: getCSSVariables('--color-accent'),
+        },
+        {
+          text: ',',
+        },
+        {
+          text: ' accessibility\n',
+          color: getCSSVariables('--color-accent'),
+        },
+        {
+          text: 'and crafting digital experience\n',
+          textAlign: 'right',
+        },
+        {
+          text: 'that feel more',
+          textAlign: 'right',
+        },
+        {
+          text: ' human',
+          color: getCSSVariables('--color-accent'),
+        },
+        {
+          text: '.',
+        },
       ],
       {
         position: {
@@ -213,7 +253,7 @@ onMounted(async () => {
     containerRef.value.appendChild(state.renderer.domElement)
 
     state.camera = new Three.PerspectiveCamera(
-      45,
+      65,
       rect.width / rect.height,
       0.1,
       10000
@@ -294,7 +334,7 @@ onUnmounted(() => {
     :class="
       classNames(
         'flex items-center justify-center',
-        'max-w-2xl w-full mx-auto',
+        'max-w-8xl w-full mx-auto',
         'relative min-h-[calc(100vh-10rem)]'
       )
     "

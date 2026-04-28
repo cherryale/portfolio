@@ -6,9 +6,14 @@ const { parse } = useMarkdown()
 </script>
 
 <template>
-  <div class="h-screen">
+  <div
+    class="relative h-screen bg-no-repeat bg-cover"
+    :style="{
+      backgroundImage: `url('/assets/images/png/texture.png')`,
+    }"
+  >
     <div
-      class="flex flex-col gap-20 items-center min-h-full justify-center xl:px-20 bg-hero-background"
+      class="flex flex-col gap-20 items-center min-h-full justify-center xl:px-20"
     >
       <AvailableForWork />
       <Liquid v-if="isDesktop" />
@@ -17,9 +22,9 @@ const { parse } = useMarkdown()
         class="block md:hidden hero-text"
         v-html="parse(t('hero.text_1'))"
       />
-      <figure class="absolute max-w-50 lg:max-w-80 z-2 animate-float">
+      <!-- <figure class="absolute max-w-50 lg:max-w-80 z-2 animate-float">
         <img src="/assets/images/png/hero.png" alt="" />
-      </figure>
+      </figure> -->
       <!-- <Model /> -->
       <p
         v-if="!isDesktop"
@@ -28,13 +33,13 @@ const { parse } = useMarkdown()
       />
       <AvailableForWork />
       <ContactMe
-        :class-name="'absolute z-2 bottom-10 right-10'"
+        :class-name="'absolute z-2 bottom-20 right-10'"
         :size="'default'"
-        :text="'Hire me'"
+        :text="'Say hello'"
         :colors="{
-          slash: 'var(--color-cherry-20)',
-          arrow: 'var(--color-cherry-70)',
-          text: 'text-accent',
+          slash: 'var(--color-cherry-40)',
+          arrow: 'var(--color-accent)',
+          text: 'text-cherry',
         }"
       />
     </div>

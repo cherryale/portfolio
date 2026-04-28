@@ -27,8 +27,11 @@
 @theme {
   --color-*: initial;
 
+  --max-w-8xl: 1480px;
+
   /* CONSTANT COLORS */
   /* Stay the same across theme variant and dark/light mode */
+  --color-white: #fff;
   --color-accent: #fe5367;
   --color-accent-dark: #db5259;
 
@@ -39,6 +42,7 @@
   --color-cherry-40: rgba(131, 28, 46, 0.4);
   --color-cherry-70: rgba(131, 28, 46, 0.7);
 
+  --color-black: #373737;
   --color-foreground: var(--color-cherry);
   --color-background: #f5eff0;
 
@@ -61,8 +65,6 @@
   --color-red-300: #882f3b;
   --color-red-400: #5a051a;
   --color-red-500: #370012;
-
-  --color-hero-background: #ffabaf;
 
   --color-green-100: #a6d36f;
   --color-green-200: #709049;
@@ -162,6 +164,7 @@
 
   h2 {
     font-size: clamp(3rem, 2.75rem + 1.5vw, 3.5rem);
+    font-weight: 700;
   }
 
   h3 {
@@ -217,7 +220,7 @@
 }
 
 .hero-text {
-  @apply text-5xl md:text-7xl font-bold relative;
+  @apply text-cherry text-5xl md:text-7xl font-bold relative;
 
   strong {
     @apply text-accent;
