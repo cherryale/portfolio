@@ -11,6 +11,43 @@
     "text_1": "I am a **senior web developer** & casual **UI designer**.\nI work at the intersection of **technology** and **creativity**.",
     "text_2": "I am passionate about **intuitive interfaces**, **accessibility** & casual **UI designer**."
   },
+  "projects": [
+    {
+      "name": "DRLAB",
+      "description": "E-Commerce",
+      "stack": ["Figma", "Shopify", "Liquid"],
+      "image": "/assets/images/projects/dr-lab.png",
+      "url": ""
+    },
+    {
+      "name": "NORWEGIAN FILM COMMISSION",
+      "description": "Website",
+      "stack": ["Sanity CMS", "React", "Tailwind", "Next.js"],
+      "image": "/assets/images/projects/nfc.png",
+      "url": ""
+    },
+    {
+      "name": "N3",
+      "description": "Website",
+      "stack": ["Sanity CMS", "React", "Tailwind", "Next.js"],
+      "image": "/assets/images/projects/n3.png",
+      "url": ""
+    },
+    {
+      "name": "JÉ ST SUME",
+      "description": "Personal website",
+      "stack": ["Figma", "Sanity CMS", "React", "Tailwind"],
+      "image": "/assets/images/projects/je-st-sume.png",
+      "url": ""
+    },
+    {
+      "name": "2140",
+      "description": "Official website",
+      "stack": ["Figma", "Sanity CMS", "React", "Tailwind"],
+      "image": "/assets/images/projects/2140.png",
+      "url": ""
+    }
+  ],
   "meta": {
     "title": "Web Developer & UI Designer",
     "description": "Web developer & UI designer based in Amsterdam passionate about creating digital experiences that are more human and accessible.",

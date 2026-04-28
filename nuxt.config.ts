@@ -85,7 +85,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  css: ['~/assets/css/globals.css'],
+  css: ['~/assets/css/globals.css', 'swiper/css'],
   postcss: {
     plugins: {
       '@tailwindcss/postcss': {},

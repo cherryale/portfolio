@@ -9,7 +9,7 @@ import type {
 } from '~/layers/liquid/types/text'
 
 const defaults: BaseTextConfig = {
-  fontSize: 4.75,
+  fontSize: 5,
   fontWeight: 700,
   lineHeight: 1.05,
   font: '/assets/fonts/LexendDeca-Bold.ttf',

@@ -22,7 +22,7 @@ const SKILLS = [
 </script>
 
 <template>
-  <Section :bg-color="'bg-cherry-300'">
+  <Section :bg-color="'bg-white'">
     <Content
       :title="'Work Experience & Education'"
       :title-color="'text-cherry-400'"
