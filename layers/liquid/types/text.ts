@@ -1,4 +1,4 @@
-type Alignment = 'left' | 'justify' | 'center' | 'right'
+type Alignment = 'left' | 'center' | 'right'
 
 export interface BaseTextConfig {
   fontSize: number

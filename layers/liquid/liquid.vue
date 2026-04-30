@@ -27,6 +27,9 @@ interface ThemeState {
 }
 
 const containerRef = ref<HTMLDivElement | null>(null)
+const isHovering = ref(false)
+let frameCount = 0
+
 const state: LiquidState = {
   texture: null,
   animationFrameId: null,
@@ -224,6 +227,10 @@ const rerenderTheme = async () => {
 const tick = () => {
   render()
   if (state.texture) {
+    frameCount++
+    if (isHovering.value && frameCount % 20 === 0) {
+      state.texture.addNoisePoint(Math.random(), Math.random(), 0.65)
+    }
     state.texture.update()
   }
   if (state.canvasTexture) {
@@ -293,6 +300,12 @@ onMounted(async () => {
     }
 
     containerRef.value.addEventListener('mousemove', onMouseMove)
+    containerRef.value.addEventListener('mouseenter', () => {
+      isHovering.value = true
+    })
+    containerRef.value.addEventListener('mouseleave', () => {
+      isHovering.value = false
+    })
   }
   tick()
 })
@@ -303,6 +316,12 @@ onUnmounted(() => {
 
   if (containerRef.value) {
     containerRef.value.removeEventListener('mousemove', onMouseMove)
+    containerRef.value.removeEventListener('mouseenter', () => {
+      isHovering.value = true
+    })
+    containerRef.value.removeEventListener('mouseleave', () => {
+      isHovering.value = false
+    })
   }
   if (state.animationFrameId !== null) {
     cancelAnimationFrame(state.animationFrameId)
