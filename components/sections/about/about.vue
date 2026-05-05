@@ -16,22 +16,28 @@ const SKILLS = [
   'Sanity CMS',
   'Wordpress',
   'Shopify',
-  'Design',
+  'Web Design',
   'Figma',
 ]
 </script>
 
 <template>
-  <Section :bg-color="'bg-white'">
-    <Content
-      :title="'Work Experience & Education'"
-      :title-color="'text-cherry-400'"
-    >
-      <Experience :items="WORK_EXPERIENCE" />
-      <Experience :items="EDUCATION" :class-name="'mt-30'" />
-    </Content>
-    <Content :title="'Tech stack & Skills'" :title-color="'text-cherry-400'">
+  <Section class="bg-white">
+    <Container>
+      <div class="text-4xl lg:text-5xl font-bold pl-20 relative z-1">
+        <p class="eyebrow text-accent">About me</p>
+        <h2>Tech stack & Skills</h2>
+      </div>
       <Pills :items="SKILLS" />
-    </Content>
+    </Container>
+    <Container>
+      <h2 class="text-4xl lg:text-5xl font-bold pl-20 relative z-1">
+        Work Experience & Education
+      </h2>
+      <div class="mt-[-10px] relative z-2">
+        <Experience highlighted :items="WORK_EXPERIENCE" />
+        <Experience :items="EDUCATION" :class-name="'mt-30'" />
+      </div>
+    </Container>
   </Section>
 </template>

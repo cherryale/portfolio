@@ -3,7 +3,7 @@ defineProps<{
   url: string
   name: string
   description: string
-  stack: string[]
+  stack: string
   image: string
 }>()
 </script>
@@ -30,11 +30,9 @@ defineProps<{
         <span class="text-cherry-40">//</span>
         <p class="text-cherry-70">{{ description }}</p>
       </div>
-      <ul class="flex items-center gap-1 text-sm mt-2">
-        <li v-for="item in stack" class="text-black">
-          {{ item }}
-        </li>
-      </ul>
+      <p class="flex items-center gap-1 text-sm mt-2 text-black">
+        {{ stack }}
+      </p>
     </div>
   </a>
 </template>

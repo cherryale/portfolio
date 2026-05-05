@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import SocialLink from '~/components/social-link/social-link.vue'
 import Section from '~/components/section/section.vue'
-import { SOCIAL_LINKS } from '~/lib/constants'
-import ContactMe from '~/components/contact-me/contact-me.vue'
-import Content from '~/components/content/content.vue'
 import Project from '~/components/project/project.vue'
 import gsap from 'gsap'
 
 const { tm, rt } = useI18n()
-const projects = tm('projects').map((p: any) => ({
+const projects = (tm('projects') as []).map((p: any) => ({
   name: rt(p.name),
   description: rt(p.description),
-  stack: p.stack.map((s: any) => rt(s)),
+  stack: rt(p.stack),
   image: rt(p.image),
   url: rt(p.url),
 }))
@@ -28,9 +24,6 @@ onMounted(() => {
     duration: 40,
     ease: 'none',
     repeat: -1,
-    // modifiers: {
-    //   x: gsap.utils.unitize((x) => parseFloat(x) % halfWidth),
-    // },
   })
 })
 

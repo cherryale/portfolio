@@ -34,10 +34,7 @@ const child = {
 </script>
 
 <template>
-  <div
-    class="flex items-center text-xs absolute right-5 md:right-10"
-    @mouseleave="toggleLanguages(false)"
-  >
+  <div class="flex items-center text-xs" @mouseleave="toggleLanguages(false)">
     <AnimatePresence mode="wait">
       <motion.div
         v-if="isOpen"
@@ -69,7 +66,7 @@ const child = {
     <button
       @keydown="toggleLanguages(true)"
       @mouseenter="toggleLanguages(true)"
-      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-40 uppercase font-medium transition relative"
+      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-40 uppercase transition relative"
     >
       <AnimatePresence>
         <motion.span :key="locale" v-bind="child" class="absolute">
