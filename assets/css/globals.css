@@ -1,0 +1,292 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('/assets/fonts/LexendDeca-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('/assets/fonts/LexendDeca-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url('/assets/fonts/LexendDeca-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-*: initial;
+
+  --max-w-8xl: 1480px;
+
+  /* CONSTANT COLORS */
+  /* Stay the same across theme variant and dark/light mode */
+  --color-white: #fff;
+  --color-accent: #fe5367;
+  --color-accent-dark: #db5259;
+
+  /* LIGHT MODE */
+  --color-cherry: #831c2e;
+  --color-cherry-10: #eadadd;
+  --color-cherry-20: #dec5c9;
+  --color-cherry-40: #c79ba2;
+  --color-cherry-70: #a55b68;
+
+  --color-black: #373737;
+  --color-foreground: var(--color-cherry);
+  --color-background: #eadadd;
+
+  --color-green: #a6d36f;
+  --color-green-dark: #709049;
+
+  /* ===================================
+  BRANDING COLORS
+  ==================================
+  This website supports 3 theme variants (pink, blue and lilac); each variant
+  has a light and dark mode */
+
+  /* Default variant - Pink (Light mode) */
+  /* --color-pink-100: #f5eff0;
+  --color-pink-200: #f0d9db;
+  --color-pink-300: #d9b3b6;
+  --color-pink-400: #b14b58;
+  --color-pink-500: #831c2e; */
+
+  /* Default variant - Pink (Dark mode) */
+  --color-red-100: #fdd5d9;
+  --color-red-200: #de7581;
+  --color-red-300: #882f3b;
+  --color-red-400: #5a051a;
+  --color-red-500: #370012;
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-3xl: 1520px;
+
+  /* Container Max Widths */
+  --container-2xs: 480px;
+  --container-xs: 600px;
+  --container-sm: 720px;
+  --container-md: 900px;
+  --container-lg: 1150px;
+  --container-xl: 1440px;
+  --container-2xl: 1520px;
+}
+
+:root {
+  /* Fonts */
+  --font-family-base: 'Lexend Deca', sans-serif;
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 700;
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  --color-cherry-100: var(--color-red-500);
+  --color-cherry-200: var(--color-red-400);
+  --color-cherry-300: var(--color-red-300);
+  --color-cherry-400: var(--color-red-200);
+  --color-cherry-500: var(--color-red-100);
+}
+
+@layer base {
+  html {
+    min-height: 100%;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  * {
+    box-sizing: border-box;
+    transition:
+      background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out,
+      fill 0.3s ease-in-out,
+      stroke 0.3s ease-in-out;
+  }
+
+  body {
+    box-sizing: border-box;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-family-base);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100%;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: underline dotted;
+    transition: 0.2s color ease-in-out;
+  }
+
+  p + p {
+    margin-top: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.15;
+    font-weight: 500;
+  }
+
+  /* h1 {
+    font-size: clamp(3.5rem, 3rem + 2vw, 4rem);
+  } */
+
+  h2 {
+    font-size: clamp(3rem, 2.75rem + 1.5vw, 3.5rem);
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: clamp(2rem, 1.75rem + 1.25vw, 2.5rem);
+  }
+
+  h4 {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+
+  h5,
+  h6 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    text-transform: uppercase;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .bg-linear-tr {
+    background: linear-gradient(
+      to top right,
+      var(--color-cherry-40),
+      var(--color-cherry-20),
+      var(--color-accent)
+    );
+  }
+
+  .bg-linear-25deg {
+    background: linear-gradient(
+      25deg,
+      var(--color-cherry-40),
+      var(--color-accent),
+      var(--color-cherry-40),
+      var(--color-accent)
+    );
+  }
+
+  /* Text size utilities */
+  .eyebrow {
+    @apply text-sm text-cherry-70;
+    /* font-size: 0.85rem; */
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+
+@keyframes pill-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-pill-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-cherry-40),
+    var(--color-cherry-20),
+    var(--color-accent),
+    var(--color-cherry-40)
+  );
+  background-size: 200% 100%;
+  animation: pill-shimmer 2s ease-in-out infinite;
+  animation-direction: alternate;
+}
+
+.animate-pill-shimmer-reverse {
+  background: linear-gradient(
+    90deg,
+    var(--color-cherry-20),
+    var(--color-cherry-40),
+    var(--color-accent),
+    var(--color-cherry-20)
+  );
+  background-size: 200% 100%;
+  animation: pill-shimmer 2s ease-in-out infinite;
+  animation-direction: alternate-reverse;
+}
+
+.animate-experience-shimmer {
+  background: linear-gradient(
+    to bottom right,
+    var(--color-cherry-40),
+    var(--color-cherry-20),
+    var(--color-accent)
+  );
+  animation-direction: alternate;
+}
+
+@keyframes float {
+  0% {
+    /* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
+    transform: translateY(0);
+  }
+  50% {
+    /* box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2); */
+    transform: translateY(-1rem);
+  }
+  100% {
+    /* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-text {
+  @apply text-cherry text-5xl md:text-7xl font-bold relative;
+
+  strong {
+    @apply text-accent;
+  }
+}
