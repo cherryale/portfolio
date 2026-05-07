@@ -44,7 +44,10 @@
 
   --color-black: #373737;
   --color-foreground: var(--color-cherry);
-  --color-background: #f5eff0;
+  --color-background: #eadadd;
+
+  --color-green: #a6d36f;
+  --color-green-dark: #709049;
 
   /* ===================================
   BRANDING COLORS
@@ -65,9 +68,6 @@
   --color-red-300: #882f3b;
   --color-red-400: #5a051a;
   --color-red-500: #370012;
-
-  --color-green-100: #a6d36f;
-  --color-green-200: #709049;
 
   /* Breakpoints */
   --breakpoint-sm: 576px;
@@ -124,6 +124,7 @@
 
   body {
     box-sizing: border-box;
+    background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-family-base);
     font-size: 16px;
@@ -198,20 +199,12 @@
     );
   }
 
-  .bg-linear-bl {
+  .bg-linear-25deg {
     background: linear-gradient(
-      to bottom left,
+      25deg,
       var(--color-cherry-40),
-      var(--color-cherry-20),
-      var(--color-accent)
-    );
-  }
-
-  .bg-linear-br {
-    background: linear-gradient(
-      to bottom right,
+      var(--color-accent),
       var(--color-cherry-40),
-      var(--color-cherry-20),
       var(--color-accent)
     );
   }
@@ -224,6 +217,51 @@
     text-transform: uppercase;
     font-weight: 500;
   }
+}
+
+@keyframes pill-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-pill-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-cherry-40),
+    var(--color-cherry-20),
+    var(--color-accent),
+    var(--color-cherry-40)
+  );
+  background-size: 200% 100%;
+  animation: pill-shimmer 2s ease-in-out infinite;
+  animation-direction: alternate;
+}
+
+.animate-pill-shimmer-reverse {
+  background: linear-gradient(
+    90deg,
+    var(--color-cherry-20),
+    var(--color-cherry-40),
+    var(--color-accent),
+    var(--color-cherry-20)
+  );
+  background-size: 200% 100%;
+  animation: pill-shimmer 2s ease-in-out infinite;
+  animation-direction: alternate-reverse;
+}
+
+.animate-experience-shimmer {
+  background: linear-gradient(
+    to bottom right,
+    var(--color-cherry-40),
+    var(--color-cherry-20),
+    var(--color-accent)
+  );
+  animation-direction: alternate;
 }
 
 @keyframes float {

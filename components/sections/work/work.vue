@@ -38,20 +38,20 @@ function resume() {
 </script>
 
 <template>
-  <Section class="bg-white rounded-t-4xl mt-[-40px] z-1">
+  <Section class="bg-white rounded-t-4xl z-1 mt-[-20px] md:mt-[-40px]">
     <div>
-      <Container class="text-4xl lg:text-5xl font-bold pl-20">
+      <Container class="text-4xl lg:text-5xl font-bold lg:pl-20">
         <p class="eyebrow">Design & Development</p>
-        <h2>Selected work</h2>
+        <h2 class="text-accent-dark">Selected work</h2>
       </Container>
       <div
-        class="overflow-hidden mt-[-20px]"
+        class="overflow-hidden mt-[-16px] lg:mt-[-20px]"
         @mouseenter="pause"
         @mouseleave="resume"
       >
-        <div ref="track" class="flex w-max gap-[20px]">
-          <Project v-for="p in projects" v-bind="p" class="shrink-0" />
-          <Project v-for="p in projects" v-bind="p" class="w-110 shrink-0" />
+        <div ref="track" class="flex w-max gap-5">
+          <Project v-for="p in projects" v-bind="p" />
+          <Project v-for="p in projects" v-bind="p" />
         </div>
       </div>
     </div>

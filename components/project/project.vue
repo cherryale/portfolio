@@ -13,9 +13,9 @@ defineProps<{
     :href="url"
     target="_blank"
     rel="noreferrer"
-    class="w-110 text-base flex flex-col gap-4 no-underline group-hover"
+    class="w-80 lg:w-110 text-base flex flex-col gap-4 no-underline group-hover shrink-0"
   >
-    <figure class="h-110 w-110 rounded-2xl overflow-hidden">
+    <figure class="h-80 lg:h-110 w-80 lg:w-110 rounded-2xl overflow-hidden">
       <img
         width="440"
         height="440"

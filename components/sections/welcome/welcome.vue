@@ -7,7 +7,7 @@ const { parse } = useMarkdown()
 
 <template>
   <div
-    class="relative h-screen bg-no-repeat bg-cover"
+    class="relative min-h-screen py-40 md:py-0 md:h-screen bg-no-repeat bg-cover"
     :style="{
       backgroundImage: `url('/assets/images/png/texture.png')`,
     }"
@@ -19,7 +19,7 @@ const { parse } = useMarkdown()
       <Liquid v-if="isDesktop" />
       <p
         v-if="!isDesktop"
-        class="block md:hidden hero-text"
+        class="px-5 block md:hidden hero-text"
         v-html="parse(t('hero.text_1'))"
       />
       <!-- <figure class="absolute max-w-50 lg:max-w-80 z-2 animate-float">
@@ -28,16 +28,15 @@ const { parse } = useMarkdown()
       <!-- <Model /> -->
       <p
         v-if="!isDesktop"
-        class="block md:hidden hero-text relative z-2"
+        class="px-5 block md:hidden hero-text relative z-2"
         v-html="parse(t('hero.text_2'))"
       />
-      <AvailableForWork />
       <ContactMe
-        :class-name="'absolute z-2 bottom-20 right-10'"
+        :class-name="'absolute z-2 bottom-10 md:bottom-20 right-5 md:right-10'"
         :size="'default'"
         :text="'Say hello'"
         :colors="{
-          slash: 'var(--color-cherry-40)',
+          slash: 'var(--color-accent-dark)',
           arrow: 'var(--color-accent)',
           text: 'text-cherry',
         }"

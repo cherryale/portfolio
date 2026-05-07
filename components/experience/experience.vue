@@ -17,26 +17,19 @@ defineProps<{
   <ul :class="classNames('flex flex-col gap-5', className)">
     <li
       v-for="(item, index) in items"
-      :class="
-        classNames(
-          'rounded-full py-10 px-14 relative',
-          highlighted && index === 0 ? 'bg-cherry-10' : 'bg-white'
-        )
-      "
+      class="rounded-full py-5 sm:py-10 px-14 relative bg-white"
     >
       <span
         :class="
           classNames(
             'absolute block z-[-1] h-[calc(100%+2px)] w-[calc(100%+2px)] top-[-1px] left-[-1px] bg-accent rounded-full',
-            highlighted
-              ? index === 0
-                ? 'bg-cherry-20'
-                : 'bg-linear-bl'
-              : 'bg-cherry-10'
+            highlighted && index === 0 ? 'bg-linear-25deg' : 'bg-black/15'
           )
         "
       />
-      <div class="text-sm pt-2 flex items-center justify-between">
+      <div
+        class="text-sm pt-2 flex gap-5 flex-col sm:flex-row md:items-center justify-between"
+      >
         <div
           :class="
             classNames(

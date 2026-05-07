@@ -19,7 +19,7 @@ import { SOCIAL_LINKS } from '~/lib/constants'
             :size="'default'"
             :text="'Say hello'"
             :colors="{
-              slash: 'var(--color-cherry-40)',
+              slash: 'var(--color-accent-dark)',
               arrow: 'var(--color-cherry)',
               text: 'text-white',
             }"
@@ -31,7 +31,7 @@ import { SOCIAL_LINKS } from '~/lib/constants'
               :href="item.url"
               target="_blank"
               :title="item.title"
-              class="text-white"
+              class="text-white hover:text-cherry"
             >
               <component :is="item.icon" />
             </NuxtLink>
