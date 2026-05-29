@@ -10,13 +10,6 @@
   },
   "projects": [
     {
-      "name": "Dellia Nutrients",
-      "description": "Official website",
-      "stack": "Sanity CMS · Next.js · React · Tailwind",
-      "image": "/assets/images/projects/nutrients.png",
-      "url": "https://www.dellianutrients.com/"
-    },
-    {
       "name": "DRLAB",
       "description": "E-Commerce",
       "stack": "Figma · Shopify · Liquid",
