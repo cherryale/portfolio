@@ -36,7 +36,7 @@ const SKILLS: { value: string; highlighted: boolean }[] = [
       >
         Work Experience & Education
       </h2>
-      <div class="mt-[-10px] relative z-2">
+      <div class="-mt-2 relative z-2">
         <Experience highlighted :items="WORK_EXPERIENCE" />
         <Experience :items="EDUCATION" :class-name="'mt-30'" />
       </div>

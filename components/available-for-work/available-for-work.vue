@@ -11,7 +11,7 @@ const { t } = useI18n()
         class="absolute block z-[-1] h-[calc(100%+2px)] w-[calc(100%+2px)] top-[-1px] left-[-1px] bg-accent rounded-full"
       />
       <span class="block h-2 w-2 rounded-full bg-green" />
-      {{ t('welcome.status') }}
+      {{ t('status.value') }}
     </div>
   </div>
 </template>

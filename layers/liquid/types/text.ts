@@ -30,4 +30,5 @@ export interface InlineLayoutConfig {
   fontSize?: number
   lineHeight?: number // multiplier, e.g. 1.05–1.25
   letterSpacing?: number // optional
+  centerX?: number // if set, shift the whole block so its visual center lands here
 }

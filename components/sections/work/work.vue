@@ -45,7 +45,7 @@ function resume() {
         <h2 class="text-accent-dark">Selected work</h2>
       </Container>
       <div
-        class="overflow-hidden mt-[-16px] lg:mt-[-20px]"
+        class="overflow-hidden -mt-2 lg:-mt-4"
         @mouseenter="pause"
         @mouseleave="resume"
       >

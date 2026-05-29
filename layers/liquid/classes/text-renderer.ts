@@ -84,8 +84,8 @@ export class TextRenderer {
     layout: InlineLayoutConfig
   ): Promise<Text[]> {
     const fontUrl = defaults.font
-    const fontSize = defaults.fontSize
-    const lineHeight = defaults.lineHeight
+    const fontSize = layout.fontSize ?? defaults.fontSize
+    const lineHeight = layout.lineHeight ?? defaults.lineHeight
 
     const { x: startX, y: startY, z } = layout.position
 
@@ -133,51 +133,65 @@ export class TextRenderer {
       for (let i = 0; i < parts.length; i++) {
         const chunk = parts[i]
 
-        if (lineMeshes.length === 0) {
-          lineAlign = run.textAlign ?? 'left'
-          lineIndent = run.indent ?? 0
-        }
-
         if (chunk.length > 0) {
-          const mesh = new Text()
-          mesh.text = chunk
-          mesh.font = fontUrl
-          mesh.fontSize = fontSize
-          mesh.color = run.color ?? resolveDefaultColor()
-          mesh.textAlign = 'left'
-          mesh.anchorX = 'left'
-          mesh.anchorY = 'top'
-          ;(mesh as any).lineHeight = lineHeight
+          // Split into word tokens; leading space is kept with the following word
+          // so inter-run spacing (e.g. ' senior') is preserved.
+          const tokens = chunk.match(/\s*\S+/g) ?? [chunk]
 
-          if (layout.letterSpacing != null) {
-            ;(mesh as any).letterSpacing = layout.letterSpacing
-          }
+          for (const token of tokens) {
+            if (lineMeshes.length === 0) {
+              lineAlign = run.textAlign ?? 'left'
+              lineIndent = run.indent ?? 0
+            }
 
-          mesh.position.set(startX + lineIndent + xCursor, startY - yCursor, z)
+            // Strip leading whitespace when placing at the start of a line
+            const displayText = xCursor === 0 ? token.trimStart() : token
+            if (!displayText) continue
 
-          this.scene.add(mesh)
-          this.textMeshes.push(mesh)
-          created.push(mesh)
-          lineMeshes.push(mesh)
+            const mesh = new Text()
+            mesh.text = displayText
+            mesh.font = fontUrl
+            mesh.fontSize = fontSize
+            mesh.color = run.color ?? resolveDefaultColor()
+            mesh.textAlign = 'left'
+            mesh.anchorX = 'left'
+            mesh.anchorY = 'top'
+            ;(mesh as any).lineHeight = lineHeight
 
-          await syncText(mesh)
+            if (layout.letterSpacing != null) {
+              ;(mesh as any).letterSpacing = layout.letterSpacing
+            }
 
-          const w = getTextWidth(mesh)
-          const available = layout.maxWidth - lineIndent
+            mesh.position.set(startX + lineIndent + xCursor, startY - yCursor, z)
 
-          if (xCursor > 0 && xCursor + w > available) {
-            newLine()
+            this.scene.add(mesh)
+            this.textMeshes.push(mesh)
+            created.push(mesh)
+            lineMeshes.push(mesh)
 
-            lineAlign = run.textAlign ?? 'left'
-            lineIndent = run.indent ?? 0
-
-            mesh.position.set(startX + lineIndent, startY - yCursor, z)
             await syncText(mesh)
 
-            xCursor = getTextWidth(mesh)
-            lineMeshes.push(mesh)
-          } else {
-            xCursor += w
+            const w = getTextWidth(mesh)
+            const available = layout.maxWidth - lineIndent
+
+            if (xCursor > 0 && xCursor + w > available) {
+              newLine()
+
+              lineAlign = run.textAlign ?? 'left'
+              lineIndent = run.indent ?? 0
+
+              // Strip leading space on the wrapped word
+              const wrappedText = token.trimStart()
+              if (wrappedText !== displayText) mesh.text = wrappedText
+
+              mesh.position.set(startX + lineIndent, startY - yCursor, z)
+              await syncText(mesh)
+
+              xCursor = getTextWidth(mesh)
+              lineMeshes.push(mesh)
+            } else {
+              xCursor += w
+            }
           }
         }
 
@@ -188,6 +202,23 @@ export class TextRenderer {
     }
 
     finalizeLine()
+
+    // Shift the whole block so its visual center lands at layout.centerX
+    if (layout.centerX !== undefined && created.length > 0) {
+      let minX = Infinity
+      let maxX = -Infinity
+      for (const mesh of created) {
+        minX = Math.min(minX, mesh.position.x)
+        maxX = Math.max(maxX, mesh.position.x + getTextWidth(mesh))
+      }
+      const shift = layout.centerX - (minX + maxX) / 2
+      if (Math.abs(shift) > 0.01) {
+        for (const mesh of created) {
+          mesh.position.x += shift
+        }
+      }
+    }
+
     return created
   }
 
