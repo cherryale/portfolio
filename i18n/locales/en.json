@@ -13,13 +13,6 @@
   },
   "projects": [
     {
-      "name": "N3",
-      "description": "Website",
-      "stack": "Sanity CMS · React · Next.js · Tailwind · Next.js · Multi",
-      "image": "/assets/images/projects/n3.png",
-      "url": ""
-    },
-    {
       "name": "Dellia Nutrients",
       "description": "Official website",
       "stack": "Sanity CMS · Next.js · React · Tailwind",
