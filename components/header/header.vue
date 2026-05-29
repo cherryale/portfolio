@@ -19,8 +19,8 @@ const { t } = useI18n()
     </div>
     <Logo />
     <div class="flex gap-5 absolute right-5 md:right-10">
-      <LangSelector />
-      <ThemeToggle />
+      <!-- <LangSelector />
+      <ThemeToggle /> -->
     </div>
   </header>
 </template>
