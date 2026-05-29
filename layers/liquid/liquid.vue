@@ -28,6 +28,8 @@ interface ThemeState {
 
 const containerRef = ref<HTMLDivElement | null>(null)
 let hadPoints = false
+let resizeObserver: ResizeObserver | null = null
+let resizeTimer: ReturnType<typeof setTimeout> | null = null
 
 const state: LiquidState = {
   texture: null,
@@ -92,6 +94,13 @@ const addTextToScene = async () => {
     const marginX = 1
     const marginY = 1
 
+    // Scale font size proportionally to the usable width.
+    // 100 world-units is the reference width where the default size (5) was designed.
+    const BASE_FONT_SIZE = 5
+    const REFERENCE_WIDTH = 100
+    const maxWidth = usableWidth - marginX * 2
+    const fontSize = Math.max(2.5, BASE_FONT_SIZE * Math.min(1, maxWidth / REFERENCE_WIDTH))
+
     await state.textRenderer.createInlineText(
       [
         { text: 'I am a' },
@@ -149,7 +158,7 @@ const addTextToScene = async () => {
           color: getCSSVariables('--color-accent'),
         },
         {
-          text: 'and crafting digital experience\n',
+          text: 'and crafting digital experiences\n',
           textAlign: 'right',
         },
         {
@@ -170,7 +179,9 @@ const addTextToScene = async () => {
           y: usableHeight / 2 - marginY,
           z,
         },
-        maxWidth: usableWidth - marginX * 2,
+        maxWidth,
+        fontSize,
+        centerX: 0,
       }
     )
   }
@@ -221,6 +232,23 @@ const rerenderTheme = async () => {
   } else if (state.camera) {
     state.renderer.render(state.scene, state.camera)
   }
+}
+
+const handleResize = () => {
+  if (resizeTimer !== null) clearTimeout(resizeTimer)
+  resizeTimer = setTimeout(async () => {
+    resizeTimer = null
+    if (!containerRef.value || !state.renderer || !state.camera) return
+    const rect = containerRef.value.getBoundingClientRect()
+    state.renderer.setSize(rect.width, rect.height)
+    state.composer?.setSize(rect.width, rect.height)
+    state.camera.aspect = rect.width / rect.height
+    state.camera.updateProjectionMatrix()
+    await addTextToScene()
+    if (state.composer && state.clock) {
+      state.composer.render(state.clock.getDelta())
+    }
+  }, 300)
 }
 
 const tick = () => {
@@ -299,6 +327,9 @@ onMounted(async () => {
     }
 
     containerRef.value.addEventListener('mousemove', onMouseMove)
+
+    resizeObserver = new ResizeObserver(handleResize)
+    resizeObserver.observe(containerRef.value)
   }
   tick()
 })
@@ -306,6 +337,14 @@ onMounted(async () => {
 onUnmounted(() => {
   theme.observer?.disconnect()
   theme.observer = null
+
+  resizeObserver?.disconnect()
+  resizeObserver = null
+
+  if (resizeTimer !== null) {
+    clearTimeout(resizeTimer)
+    resizeTimer = null
+  }
 
   if (containerRef.value) {
     containerRef.value.removeEventListener('mousemove', onMouseMove)

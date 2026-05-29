@@ -7,7 +7,7 @@ defineProps<{
 </script>
 <template>
   <ul
-    class="max-w-lg flex flex-wrap gap-2 md:gap-5 mt-[-16px] lg:mt-[-20px] relative z-2"
+    class="max-w-lg flex flex-wrap gap-2 md:gap-5 -mt-2 lg:-mt-4 relative z-2"
   >
     <li
       v-for="(item, index) in items"

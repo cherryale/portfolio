@@ -163,7 +163,7 @@
   } */
 
   h2 {
-    font-size: clamp(3rem, 2.75rem + 1.5vw, 3.5rem);
+    font-size: clamp(3rem, 3rem, 3.5rem);
     font-weight: 700;
   }
 
@@ -231,37 +231,51 @@
 .animate-pill-shimmer {
   background: linear-gradient(
     90deg,
+    rgba(0, 0, 0, 0.15),
     var(--color-cherry-40),
-    var(--color-cherry-20),
     var(--color-accent),
-    var(--color-cherry-40)
+    rgba(0, 0, 0, 0.15)
   );
   background-size: 200% 100%;
-  animation: pill-shimmer 2s ease-in-out infinite;
+  animation: pill-shimmer 1s ease-in-out infinite;
   animation-direction: alternate;
 }
 
 .animate-pill-shimmer-reverse {
   background: linear-gradient(
     90deg,
-    var(--color-cherry-20),
+    rgba(0, 0, 0, 0.15),
     var(--color-cherry-40),
     var(--color-accent),
-    var(--color-cherry-20)
+    rgba(0, 0, 0, 0.15)
   );
   background-size: 200% 100%;
-  animation: pill-shimmer 2s ease-in-out infinite;
+  animation: pill-shimmer 1s ease-in-out infinite;
   animation-direction: alternate-reverse;
+}
+
+@keyframes experience-shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 .animate-experience-shimmer {
   background: linear-gradient(
-    to bottom right,
-    var(--color-cherry-40),
-    var(--color-cherry-20),
+    to top left,
+    var(--color-accent),
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15),
     var(--color-accent)
   );
-  animation-direction: alternate;
+  background-size: 200% 200%;
+  animation: experience-shimmer 2s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -284,7 +298,7 @@
 }
 
 .hero-text {
-  @apply text-cherry text-5xl md:text-7xl font-bold relative;
+  @apply text-cherry text-4xl md:text-6xl leading-[1.15] font-bold relative;
 
   strong {
     @apply text-accent;
