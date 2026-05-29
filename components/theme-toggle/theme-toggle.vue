@@ -48,7 +48,7 @@ const iconAnimationProps = {
   <div class="flex items-center relative text-xs">
     <button
       @click="toggleDark()"
-      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-300 relative"
+      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-40 relative"
     >
       <AnimatePresence>
         <motion.i

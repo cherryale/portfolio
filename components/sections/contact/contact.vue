@@ -5,25 +5,33 @@ import { SOCIAL_LINKS } from '~/lib/constants'
 </script>
 
 <template>
-  <div class="bg-cherry-400 py-6">
+  <div class="bg-accent pb-6">
+    <div class="bg-white rounded-b-4xl h-10 mb-10" />
     <Container>
-      <div class="flex items-center justify-between gap-5">
-        <ContactMe
-          :size="'default'"
-          :text="'Get in touch'"
-          :colors="{
-            slash: 'var(--color-cherry-300)',
-            arrow: 'var(--color-cherry-500)',
-            text: 'text-cherry-100',
-          }"
-        />
+      <div class="flex items-end justify-between gap-5">
+        <div>
+          <h3 class="text-base mb-3">Want to collaborate?</h3>
+          <p class="max-w-2xs text-sm mb-5">
+            Whether you're looking to start on a new project, need ongoing
+            support or simply want to say hi, you can reach out.
+          </p>
+          <ContactMe
+            :size="'default'"
+            :text="'Say hello'"
+            :colors="{
+              slash: 'var(--color-accent-dark)',
+              arrow: 'var(--color-cherry)',
+              text: 'text-white',
+            }"
+          />
+        </div>
         <ul class="flex flex-col md:flex-row gap-5">
           <li v-for="item in SOCIAL_LINKS" :key="item.title">
             <NuxtLink
               :href="item.url"
               target="_blank"
               :title="item.title"
-              class="text-cherry-300"
+              class="text-white hover:text-cherry"
             >
               <component :is="item.icon" />
             </NuxtLink>

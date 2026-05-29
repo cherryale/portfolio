@@ -34,15 +34,12 @@ const child = {
 </script>
 
 <template>
-  <div
-    class="flex items-center text-xs absolute right-5 md:right-10"
-    @mouseleave="toggleLanguages(false)"
-  >
+  <div class="flex items-center text-xs" @mouseleave="toggleLanguages(false)">
     <AnimatePresence mode="wait">
       <motion.div
         v-if="isOpen"
         key="lang-selector"
-        class="absolute h-full right-[100%] pr-5 flex"
+        class="absolute h-full right-[100%] pr-5 flex text-cherry-70"
         :variants="container"
         initial="initial"
         animate="animate"
@@ -56,8 +53,8 @@ const child = {
           :disabled="l.code === locale"
           :class="
             classNames(
-              'transition-colors text-cherry-400 hover:underline px-5',
-              'disabled:no-underline disabled:cursor-text disabled:text-cherry-300 disabled:font-medium'
+              'transition-colors hover:underline px-5',
+              'disabled:no-underline disabled:cursor-text disabled:text-cherry disabled:font-medium'
             )
           "
         >
@@ -69,7 +66,7 @@ const child = {
     <button
       @keydown="toggleLanguages(true)"
       @mouseenter="toggleLanguages(true)"
-      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-300 uppercase text-cherry-500 font-medium transition relative"
+      class="h-10 w-10 flex items-center justify-center rounded-full border border-cherry-40 uppercase transition relative"
     >
       <AnimatePresence>
         <motion.span :key="locale" v-bind="child" class="absolute">

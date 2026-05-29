@@ -27,11 +27,27 @@
 @theme {
   --color-*: initial;
 
-  --color-cherry-100: #f5eff0;
-  --color-cherry-200: #f0d9db;
-  --color-cherry-300: #d9b3b6;
-  --color-cherry-400: #b14b58;
-  --color-cherry-500: #831c2e;
+  --max-w-8xl: 1480px;
+
+  /* CONSTANT COLORS */
+  /* Stay the same across theme variant and dark/light mode */
+  --color-white: #fff;
+  --color-accent: #fe5367;
+  --color-accent-dark: #db5259;
+
+  /* LIGHT MODE */
+  --color-cherry: #831c2e;
+  --color-cherry-10: #eadadd;
+  --color-cherry-20: #dec5c9;
+  --color-cherry-40: #c79ba2;
+  --color-cherry-70: #a55b68;
+
+  --color-black: #373737;
+  --color-foreground: var(--color-cherry);
+  --color-background: #eadadd;
+
+  --color-green: #a6d36f;
+  --color-green-dark: #709049;
 
   /* ===================================
   BRANDING COLORS
@@ -40,11 +56,11 @@
   has a light and dark mode */
 
   /* Default variant - Pink (Light mode) */
-  --color-pink-100: #f5eff0;
+  /* --color-pink-100: #f5eff0;
   --color-pink-200: #f0d9db;
   --color-pink-300: #d9b3b6;
   --color-pink-400: #b14b58;
-  --color-pink-500: #831c2e;
+  --color-pink-500: #831c2e; */
 
   /* Default variant - Pink (Dark mode) */
   --color-red-100: #fdd5d9;
@@ -52,13 +68,6 @@
   --color-red-300: #882f3b;
   --color-red-400: #5a051a;
   --color-red-500: #370012;
-
-  /* CONSTANT COLORS */
-  /* Stay the same across theme variant and dark/light mode */
-  --color-accent: #ed5b75;
-
-  --color-green-100: #a6d36f;
-  --color-green-200: #709049;
 
   /* Breakpoints */
   --breakpoint-sm: 576px;
@@ -85,13 +94,6 @@
   /* Font weights */
   --font-weight-regular: 400;
   --font-weight-semi-bold: 700;
-
-  /* Default theme: Light Mode (Pink) */
-  --color-cherry-100: var(--color-pink-100);
-  --color-cherry-200: var(--color-pink-200);
-  --color-cherry-300: var(--color-pink-300);
-  --color-cherry-400: var(--color-pink-400);
-  --color-cherry-500: var(--color-pink-500);
 }
 
 /* Dark theme */
@@ -121,9 +123,9 @@
   }
 
   body {
-    background-color: var(--color-cherry-100);
     box-sizing: border-box;
-    color: var(--color-cherry-500);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
     font-family: var(--font-family-base);
     font-size: 16px;
     font-weight: 300;
@@ -162,6 +164,7 @@
 
   h2 {
     font-size: clamp(3rem, 2.75rem + 1.5vw, 3.5rem);
+    font-weight: 700;
   }
 
   h3 {
@@ -187,9 +190,28 @@
 }
 
 @layer utilities {
+  .bg-linear-tr {
+    background: linear-gradient(
+      to top right,
+      var(--color-cherry-40),
+      var(--color-cherry-20),
+      var(--color-accent)
+    );
+  }
+
+  .bg-linear-25deg {
+    background: linear-gradient(
+      25deg,
+      var(--color-cherry-40),
+      var(--color-accent),
+      var(--color-cherry-40),
+      var(--color-accent)
+    );
+  }
+
   /* Text size utilities */
   .eyebrow {
-    @apply text-sm;
+    @apply text-sm text-cherry-70;
     /* font-size: 0.85rem; */
     line-height: 1;
     text-transform: uppercase;
@@ -197,8 +219,72 @@
   }
 }
 
+@keyframes pill-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-pill-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-cherry-40),
+    var(--color-cherry-20),
+    var(--color-accent),
+    var(--color-cherry-40)
+  );
+  background-size: 200% 100%;
+  animation: pill-shimmer 2s ease-in-out infinite;
+  animation-direction: alternate;
+}
+
+.animate-pill-shimmer-reverse {
+  background: linear-gradient(
+    90deg,
+    var(--color-cherry-20),
+    var(--color-cherry-40),
+    var(--color-accent),
+    var(--color-cherry-20)
+  );
+  background-size: 200% 100%;
+  animation: pill-shimmer 2s ease-in-out infinite;
+  animation-direction: alternate-reverse;
+}
+
+.animate-experience-shimmer {
+  background: linear-gradient(
+    to bottom right,
+    var(--color-cherry-40),
+    var(--color-cherry-20),
+    var(--color-accent)
+  );
+  animation-direction: alternate;
+}
+
+@keyframes float {
+  0% {
+    /* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
+    transform: translateY(0);
+  }
+  50% {
+    /* box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2); */
+    transform: translateY(-1rem);
+  }
+  100% {
+    /* box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6); */
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
 .hero-text {
-  @apply text-5xl md:text-7xl font-bold relative;
+  @apply text-cherry text-5xl md:text-7xl font-bold relative;
 
   strong {
     @apply text-accent;

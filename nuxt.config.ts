@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/i18n', 'motion-v/nuxt'],
+  modules: ['@nuxtjs/i18n', 'motion-v/nuxt', '@nuxt/image'],
   i18n: {
     langDir: 'locales/',
     locales: [

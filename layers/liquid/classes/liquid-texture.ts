@@ -72,6 +72,18 @@ export class LiquidTexture {
     this.clear()
   }
 
+  addNoisePoint(x: number, y: number, force: number, vx?: number, vy?: number): void {
+    const angle = Math.random() * Math.PI * 2
+    this.points.push({
+      x,
+      y,
+      age: 0,
+      force,
+      vx: vx ?? Math.cos(angle),
+      vy: vy ?? Math.sin(angle),
+    })
+  }
+
   addPoint(point: Point): void {
     // this.points.push({ x: point.x, y: point.y, age: 0 })
     let force = 0
