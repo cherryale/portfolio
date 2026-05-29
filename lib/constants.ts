@@ -80,7 +80,7 @@ export const EDUCATION = [
     to: '2018',
   },
   {
-    role: 'BA in Business Administration and Management',
+    role: 'BA in Business Administration & Management',
     company: 'Florida Atlantic University',
     location: 'Boca Raton, United States',
     from: '2011',

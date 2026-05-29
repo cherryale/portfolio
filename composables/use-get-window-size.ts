@@ -1,8 +1,10 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 export function useWindowSize() {
-  const width = ref(0)
-  const height = ref(0)
+  const isClient = typeof window !== 'undefined'
+
+  const width = ref(isClient ? window.innerWidth : 0)
+  const height = ref(isClient ? window.innerHeight : 0)
 
   const update = () => {
     width.value = window.innerWidth
