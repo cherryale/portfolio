@@ -19,7 +19,7 @@
     {
       "name": "2140",
       "description": "Official website",
-      "stack": "Design & Branding · Sanity CMS · Next.js · React · Tailwind",
+      "stack": "Design · Sanity CMS · Next.js · React · Tailwind",
       "image": "/assets/images/projects/2140.png",
       "url": "https://2140.dev/"
     },
@@ -33,7 +33,7 @@
     {
       "name": "Vilcek Foundation",
       "description": "Official website",
-      "stack": "Wordpress · Sass/HTML · Twig",
+      "stack": "Wordpress · HTML/CSS · Javascript · Twig",
       "image": "/assets/images/projects/vilcek.png",
       "url": "https://vilcek.org/"
     },
@@ -47,21 +47,21 @@
     {
       "name": "Colorado WIC",
       "description": "Official website",
-      "stack": "Wordpress · Sass/HTML · Twig",
+      "stack": "Wordpress · HTML/CSS · Javascript · Twig",
       "image": "/assets/images/projects/colorado-wic.png",
       "url": "https://www.coloradowic.gov/homepage"
     },
     {
       "name": "Seattle Center",
       "description": "Official website",
-      "stack": "Wordpress · Sass/HTML · Twig",
+      "stack": "Wordpress · HTML/CSS · Javascript · Twig",
       "image": "/assets/images/projects/seattle-center.png",
       "url": "https://www.seattlecenter.com/"
     },
     {
       "name": "Order of Malta Relief",
       "description": "Official website",
-      "stack": "Wordpress · Sass/HTML · Twig",
+      "stack": "Wordpress · HTML/CSS · Javascript · Twig",
       "image": "/assets/images/projects/malteser.png",
       "url": "https://orderofmaltarelief.org/"
     }
