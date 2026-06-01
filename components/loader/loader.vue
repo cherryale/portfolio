@@ -25,15 +25,15 @@ onMounted(() => {
   if (loader.value) {
     gsap.to(loader.value.children, {
       duration: 0.5,
-      delay: 3,
+      delay: 2.5,
       ease: 'power3.out',
       opacity: 0,
       y: '-50%',
     })
 
     gsap.to(loader.value, {
-      duration: 1,
-      delay: 4,
+      duration: 0.5,
+      delay: 3,
       ease: 'power3.out',
       height: 0,
       onComplete: () => {

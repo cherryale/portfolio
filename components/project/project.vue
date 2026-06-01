@@ -26,11 +26,11 @@ defineProps<{
     </figure>
     <div>
       <div class="flex items-center gap-2">
-        <h4 class="text-base text-cherry uppercase">{{ name }}</h4>
+        <h4 class="text-sm md:text-base text-cherry uppercase">{{ name }}</h4>
         <span class="hidden lg:block text-cherry-40">//</span>
         <p class="hidden lg:block text-cherry-70">{{ description }}</p>
       </div>
-      <p class="flex items-center gap-1 text-sm mt-2 text-black">
+      <p class="flex items-center gap-1 text-xs md:text-sm mt-2 text-black">
         {{ stack }}
       </p>
     </div>

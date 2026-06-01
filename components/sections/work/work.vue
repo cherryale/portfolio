@@ -2,6 +2,7 @@
 import Section from '~/components/section/section.vue'
 import Project from '~/components/project/project.vue'
 import gsap from 'gsap'
+import SectionTitle from '~/components/section-title/section-title.vue'
 
 const { tm, rt } = useI18n()
 const all = (tm('projects') as []).map((p: any) => ({
@@ -51,18 +52,20 @@ onUnmounted(() => {
 <template>
   <Section class="bg-white rounded-t-4xl z-1 mt-[-20px] md:mt-[-40px]">
     <div>
-      <Container class="text-4xl lg:text-5xl font-bold lg:pl-20">
-        <p class="eyebrow">Design & Development</p>
-        <h2 class="text-accent-dark">Selected work</h2>
+      <Container>
+        <SectionTitle
+          :eyebrow="'Design & Development'"
+          :title="'Selected work'"
+        />
       </Container>
       <div class="overflow-hidden -mt-4">
-        <div class="w-full overflow-hidden">
+        <div class="w-full">
           <div ref="track" class="flex w-max gap-5">
             <Project v-for="p in rtl" v-bind="p" />
             <Project v-for="p in rtl" v-bind="p" />
           </div>
         </div>
-        <div v-if="ltr.length" class="w-full overflow-hidden mt-10">
+        <div v-if="ltr.length" class="w-full mt-10">
           <div ref="track2" class="flex w-max gap-5">
             <Project v-for="p in ltr" v-bind="p" />
             <Project v-for="p in ltr" v-bind="p" />
