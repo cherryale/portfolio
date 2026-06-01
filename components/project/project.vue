@@ -5,6 +5,7 @@ defineProps<{
   description: string
   stack: string
   image: string
+  filterId?: string
 }>()
 </script>
 
@@ -21,6 +22,7 @@ defineProps<{
         height="440"
         :src="image"
         :alt="name"
+        :style="filterId ? { filter: `url(#${filterId})` } : undefined"
         class="aspect-square object-cover duration-500 transition hover:scale-[1.05]"
       />
     </figure>

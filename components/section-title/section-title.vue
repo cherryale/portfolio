@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Container from '~/components/container/container.vue'
-
 const props = defineProps<{
   eyebrow?: string
   title: string

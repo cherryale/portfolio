@@ -61,14 +61,14 @@ onUnmounted(() => {
       <div class="overflow-hidden -mt-4">
         <div class="w-full">
           <div ref="track" class="flex w-max gap-5">
-            <Project v-for="p in rtl" v-bind="p" />
-            <Project v-for="p in rtl" v-bind="p" />
+            <Project v-for="p in rtl" v-bind="p" filter-id="project-liquid" />
+            <Project v-for="p in rtl" v-bind="p" filter-id="project-liquid" />
           </div>
         </div>
         <div v-if="ltr.length" class="w-full mt-10">
           <div ref="track2" class="flex w-max gap-5">
-            <Project v-for="p in ltr" v-bind="p" />
-            <Project v-for="p in ltr" v-bind="p" />
+            <Project v-for="p in ltr" v-bind="p" filter-id="project-liquid" />
+            <Project v-for="p in ltr" v-bind="p" filter-id="project-liquid" />
           </div>
         </div>
       </div>

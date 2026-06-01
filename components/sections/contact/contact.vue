@@ -27,7 +27,9 @@ import { SOCIAL_LINKS } from '~/lib/constants'
             }"
           />
         </div>
-        <ul class="flex flex-row w-full md:w-auto justify-around gap-5">
+        <ul
+          class="flex flex-row w-full md:w-auto justify-center border-t md:border-none border-white/20 pt-10 md:pt-0 gap-10 md:gap-5"
+        >
           <li v-for="item in SOCIAL_LINKS" :key="item.title">
             <NuxtLink
               :href="item.url"

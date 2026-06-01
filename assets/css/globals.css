@@ -242,19 +242,6 @@
   animation-direction: alternate;
 }
 
-.animate-pill-shimmer-reverse {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.15),
-    var(--color-cherry-40),
-    var(--color-accent),
-    rgba(0, 0, 0, 0.15)
-  );
-  background-size: 200% 100%;
-  animation: pill-shimmer 1s ease-in-out infinite;
-  animation-direction: alternate-reverse;
-}
-
 @keyframes experience-shimmer {
   0% {
     background-position: 0% 0%;
