@@ -40,7 +40,7 @@ defineProps<{
             )
           "
         >
-          <div>
+          <div class="text-sm md:text-base">
             <p
               :class="
                 classNames(
