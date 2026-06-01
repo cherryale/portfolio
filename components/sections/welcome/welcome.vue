@@ -42,11 +42,13 @@ onMounted(() => {
     >
       <AvailableForWork />
       <Liquid v-if="isDesktop" />
-      <div
-        v-if="isMobile"
-        class="px-5 hero-text py-40"
-        v-html="parse(t('intro.text'))"
-      />
+      <div v-if="isMobile" class="px-5 hero-text py-40">
+        <LiquidFilter id="mobile-text-liquid" :scale="6" :duration="20" />
+        <div
+          style="filter: url(#mobile-text-liquid)"
+          v-html="parse(t('intro.text'))"
+        />
+      </div>
       <ContactMe
         :class-name="'absolute z-2 bottom-10 md:bottom-20 right-5 md:right-10'"
         :size="'default'"
