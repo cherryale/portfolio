@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Pills from '~/components/pills/pills.vue'
 import Section from '~/components/section/section.vue'
-import Content from '~/components/content/content.vue'
 import Experience from '~/components/experience/experience.vue'
 import { EDUCATION, WORK_EXPERIENCE } from '~/lib/constants'
 
@@ -22,21 +21,14 @@ const SKILLS: { value: string; highlighted: boolean }[] = [
 </script>
 
 <template>
-  <Section class="bg-white">
+  <Section class="bg-white z-1">
     <Container>
-      <div class="text-4xl lg:text-5xl lg:pl-20 relative z-1">
-        <p class="eyebrow text-accent">About me</p>
-        <h2 class="text-accent-dark">Tech stack & Skills</h2>
-      </div>
+      <SectionTitle :eyebrow="'About me'" :title="'Tech stack & skills'" />
       <Pills :items="SKILLS" />
     </Container>
     <Container>
-      <h2
-        class="text-4xl lg:text-5xl font-bold lg:pl-20 relative z-1 text-accent-dark"
-      >
-        Work Experience & Education
-      </h2>
-      <div class="-mt-3 relative z-2">
+      <SectionTitle :title="'Work Experience & Education'" />
+      <div class="-mt-4 relative z-2">
         <Experience highlighted :items="WORK_EXPERIENCE" />
         <Experience :items="EDUCATION" :class-name="'mt-30'" />
       </div>

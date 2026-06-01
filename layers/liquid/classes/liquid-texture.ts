@@ -27,7 +27,7 @@ interface LiquidTextureOptions {
 export class LiquidTexture {
   size: number = 64
   points: Point[] = []
-  maxAge: number = 64
+  maxAge: number = 96
   radius: number
   width: number
   height: number
@@ -100,7 +100,7 @@ export class LiquidTexture {
       vx = relativeX / distance
       vy = relativeY / distance
 
-      force = Math.min(distanceSquared * 5000, 1)
+      force = Math.max(Math.min(distanceSquared * 20000, 1), 0.2)
     }
 
     this.last = {

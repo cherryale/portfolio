@@ -5,6 +5,7 @@ defineProps<{
   description: string
   stack: string
   image: string
+  filterId?: string
 }>()
 </script>
 
@@ -21,16 +22,17 @@ defineProps<{
         height="440"
         :src="image"
         :alt="name"
+        :style="filterId ? { filter: `url(#${filterId})` } : undefined"
         class="aspect-square object-cover duration-500 transition hover:scale-[1.05]"
       />
     </figure>
     <div>
       <div class="flex items-center gap-2">
-        <h4 class="text-base text-cherry uppercase">{{ name }}</h4>
+        <h4 class="text-sm md:text-base text-cherry uppercase">{{ name }}</h4>
         <span class="hidden lg:block text-cherry-40">//</span>
         <p class="hidden lg:block text-cherry-70">{{ description }}</p>
       </div>
-      <p class="flex items-center gap-1 text-sm mt-2 text-black">
+      <p class="flex items-center gap-1 text-xs md:text-sm mt-2 text-black">
         {{ stack }}
       </p>
     </div>
