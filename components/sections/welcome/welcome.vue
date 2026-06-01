@@ -1,19 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
 import Liquid from '~/layers/liquid/liquid.vue'
 const { t } = useI18n()
 const { isDesktop, isMobile } = useMediaQueries()
 const { parse } = useMarkdown()
-
-const isMounted = ref(false)
-onMounted(() => {
-  isMounted.value = true
-})
-
-// Before mount the real viewport is unknown — always show the text so it's
-// visible in the prerendered HTML and on the first client paint.
-// After mount, show it only when the screen is actually mobile-sized.
-const showText = computed(() => !isMounted.value || isMobile.value)
 </script>
 
 <template>
@@ -28,9 +17,9 @@ const showText = computed(() => !isMounted.value || isMobile.value)
     >
       <AvailableForWork />
       <Liquid v-if="isDesktop" />
-      <p
-        v-show="showText"
-        class="px-5 hero-text py-20 md:py-40"
+      <div
+        v-if="isMobile"
+        class="px-5 hero-text py-40"
         v-html="parse(t('intro.text'))"
       />
       <ContactMe
