@@ -304,3 +304,9 @@
     @apply text-accent;
   }
 }
+
+@media (min-width: 1150px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
