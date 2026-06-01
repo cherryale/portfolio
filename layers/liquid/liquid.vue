@@ -99,7 +99,10 @@ const addTextToScene = async () => {
     const BASE_FONT_SIZE = 5
     const REFERENCE_WIDTH = 100
     const maxWidth = usableWidth - marginX * 2
-    const fontSize = Math.max(2.5, BASE_FONT_SIZE * Math.min(1, maxWidth / REFERENCE_WIDTH))
+    const fontSize = Math.max(
+      2.5,
+      BASE_FONT_SIZE * Math.min(1, maxWidth / REFERENCE_WIDTH)
+    )
 
     await state.textRenderer.createInlineText(
       [
@@ -301,7 +304,11 @@ onMounted(async () => {
 
     // --- Theme observer setup ---
     theme.signature = getThemeSignature()
-    await rerenderTheme()
+    // Force an initial render without rebuilding text (already built above)
+    state.renderer.setClearColor(0x000000, 0)
+    if (state.composer && state.clock) {
+      state.composer.render(state.clock.getDelta())
+    }
 
     theme.observer = new MutationObserver(() =>
       requestAnimationFrame(() => {
@@ -330,6 +337,7 @@ onMounted(async () => {
 
     resizeObserver = new ResizeObserver(handleResize)
     resizeObserver.observe(containerRef.value)
+
   }
   tick()
 })

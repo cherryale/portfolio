@@ -8,7 +8,9 @@ import { SOCIAL_LINKS } from '~/lib/constants'
   <div class="bg-accent pb-6">
     <div class="bg-white rounded-b-4xl h-10 mb-10" />
     <Container>
-      <div class="flex items-end justify-between gap-5">
+      <div
+        class="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 md:gap-5"
+      >
         <div>
           <h3 class="text-base mb-3">Want to collaborate?</h3>
           <p class="max-w-2xs text-sm mb-5">
@@ -25,7 +27,9 @@ import { SOCIAL_LINKS } from '~/lib/constants'
             }"
           />
         </div>
-        <ul class="flex flex-col md:flex-row gap-5">
+        <ul
+          class="flex flex-row w-full md:w-auto justify-center border-t md:border-none border-white/20 pt-10 md:pt-0 gap-10 md:gap-5"
+        >
           <li v-for="item in SOCIAL_LINKS" :key="item.title">
             <NuxtLink
               :href="item.url"

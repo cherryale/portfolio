@@ -30,7 +30,7 @@ defineProps<{
         "
       />
       <div
-        class="text-sm flex gap-5 flex-col sm:flex-row md:items-center justify-between"
+        class="flex gap-5 flex-col sm:flex-row md:items-center justify-between"
       >
         <div
           :class="
@@ -40,7 +40,7 @@ defineProps<{
             )
           "
         >
-          <div>
+          <div class="text-sm md:text-base">
             <p
               :class="
                 classNames(
