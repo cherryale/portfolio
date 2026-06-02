@@ -3,9 +3,7 @@ const { t } = useI18n()
 </script>
 <!-- TODO: add shimmer to border -->
 <template>
-  <div
-    class="hidden md:block absolute left-5 md:left-10 bottom-10 md:bottom-20"
-  >
+  <div class="hidden md:block">
     <div
       class="inline-flex gap-2 items-center rounded-full px-3 py-2 border border-green-dark/40 text-sm text-green-dark font-light relative"
     >

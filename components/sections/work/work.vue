@@ -22,6 +22,30 @@ const track2 = ref<HTMLElement | null>(null)
 let tween: gsap.core.Tween
 let tween2: gsap.core.Tween
 
+const { isAnimationComplete } = useLoader()
+
+const section = ref<{ el: HTMLElement | null } | null>(null)
+const animate = () => {
+  if (section.value?.el) {
+    gsap.fromTo(
+      section.value.el,
+      { opacity: 0, y: '50%' },
+      {
+        opacity: 1,
+        y: '0%',
+        duration: 0.5,
+        ease: 'power3.out',
+      }
+    )
+  }
+}
+
+watch(isAnimationComplete, (done) => {
+  if (done) {
+    animate()
+  }
+})
+
 onMounted(() => {
   const el = track.value!
   const halfWidth = el.scrollWidth / 2
@@ -50,7 +74,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Section class="bg-white rounded-t-4xl z-1 mt-[-20px] md:mt-[-40px]">
+  <Section
+    ref="section"
+    class="bg-white rounded-t-4xl z-1 mt-[-20px] md:mt-[-40px] opacity-0 translate-y-[50%]"
+  >
     <div>
       <Container>
         <SectionTitle
