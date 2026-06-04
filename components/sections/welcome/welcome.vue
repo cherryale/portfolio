@@ -38,12 +38,7 @@ watch(isAnimationComplete, (done) => {
 </script>
 
 <template>
-  <div
-    class="relative md:min-h-screen bg-no-repeat bg-cover"
-    :style="{
-      backgroundImage: `url('/assets/images/png/texture.png')`,
-    }"
-  >
+  <div class="relative md:min-h-screen bg-no-repeat bg-cover bg-texture">
     <div
       ref="content"
       class="flex flex-col gap-20 items-center min-h-screen justify-center xl:px-20 opacity-0"
@@ -57,20 +52,20 @@ watch(isAnimationComplete, (done) => {
         />
       </div>
     </div>
-  </div>
-  <div
-    ref="elements"
-    class="flex justify-between w-full absolute z-2 bottom-10 md:bottom-20 left-0 opacity-0 translate-y-[50%] px-5 md:px-10"
-  >
-    <AvailableForWork />
-    <ContactMe
-      :size="'default'"
-      :text="'Say hello'"
-      :colors="{
-        slash: 'var(--color-accent-dark)',
-        arrow: 'var(--color-accent)',
-        text: 'text-cherry',
-      }"
-    />
+    <div
+      ref="elements"
+      class="flex justify-end md:justify-between w-full absolute z-2 bottom-20 left-0 opacity-0 translate-y-[50%] px-5 md:px-10"
+    >
+      <AvailableForWork />
+      <ContactMe
+        :size="'default'"
+        :text="'Say hello'"
+        :colors="{
+          slash: 'var(--color-accent-dark)',
+          arrow: 'var(--color-accent)',
+          text: 'text-cherry',
+        }"
+      />
+    </div>
   </div>
 </template>

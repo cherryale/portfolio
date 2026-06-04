@@ -10,7 +10,11 @@ defineProps<{
     <li
       v-for="(item, index) in items"
       :key="item.value"
-      class="min-w-22 text-base flex items-center justify-center bg-white rounded-full relative py-3 px-7 md:py-6 md:px-14"
+      :class="
+        classNames(
+          'min-w-22 text-cherry text-base flex items-center justify-center bg-background rounded-full relative py-3 px-7 md:py-6 md:px-14'
+        )
+      "
     >
       <span
         :class="
@@ -20,7 +24,7 @@ defineProps<{
               ? index % 2
                 ? 'animate-pill-shimmer-reverse'
                 : 'animate-pill-shimmer'
-              : 'bg-black/15'
+              : 'bg-foreground/15'
           )
         "
       />

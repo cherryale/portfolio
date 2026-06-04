@@ -32,7 +32,9 @@ defineProps<{
         <span class="hidden lg:block text-cherry-40">//</span>
         <p class="hidden lg:block text-cherry-70">{{ description }}</p>
       </div>
-      <p class="flex items-center gap-1 text-xs md:text-sm mt-2 text-black">
+      <p
+        class="flex items-center gap-1 text-xs md:text-sm mt-2 text-foreground"
+      >
         {{ stack }}
       </p>
     </div>

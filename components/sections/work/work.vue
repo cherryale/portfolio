@@ -76,7 +76,7 @@ onUnmounted(() => {
 <template>
   <Section
     ref="section"
-    class="bg-white rounded-t-4xl z-1 mt-[-20px] md:mt-[-40px] opacity-0 translate-y-[50%]"
+    class="bg-background rounded-t-4xl z-1 -mt-10 opacity-0 translate-y-[50%]"
   >
     <div>
       <Container>

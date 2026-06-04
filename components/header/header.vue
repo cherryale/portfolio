@@ -38,7 +38,9 @@ watch(isAnimationComplete, (done) => animate(done))
         {{ t('header.welcome') }}
       </p>
       <span class="hidden md:block h-4 w-[2px] rounded-sm bg-accent" />
-      <h1 class="uppercase text-cherry-70 font-light">Cherry Ale</h1>
+      <h1 class="uppercase text-cherry md:text-cherry-70 md:font-light">
+        Cherry Ale
+      </h1>
     </div>
     <Logo />
     <div class="flex gap-5 absolute right-5 md:right-10">

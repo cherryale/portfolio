@@ -5,15 +5,15 @@ import { SOCIAL_LINKS } from '~/lib/constants'
 </script>
 
 <template>
-  <div class="bg-accent pb-6">
-    <div class="bg-white rounded-b-4xl h-10 mb-10" />
+  <div class="bg-contact pb-6">
+    <div class="bg-background rounded-b-4xl h-10 mb-10" />
     <Container>
       <div
         class="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 md:gap-5"
       >
         <div>
-          <h3 class="text-base mb-3">Want to collaborate?</h3>
-          <p class="max-w-2xs text-sm mb-5">
+          <h3 class="text-base mb-3 text-cherry">Want to collaborate?</h3>
+          <p class="max-w-2xs text-sm mb-5 text-white">
             Whether you're looking to start on a new project, need ongoing
             support or simply want to say hi, you can reach out.
           </p>
@@ -21,7 +21,7 @@ import { SOCIAL_LINKS } from '~/lib/constants'
             :size="'default'"
             :text="'Say hello'"
             :colors="{
-              slash: 'var(--color-accent-dark)',
+              slash: 'var(--color-cherry-70)',
               arrow: 'var(--color-cherry)',
               text: 'text-white',
             }"
