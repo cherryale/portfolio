@@ -32,6 +32,7 @@ const animate = () => {
       { opacity: 0, y: '50%' },
       {
         opacity: 1,
+        delay: 1.5,
         y: '0%',
         duration: 0.5,
         ease: 'power3.out',

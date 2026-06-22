@@ -21,6 +21,7 @@ const animate = (done?: boolean) => {
       opacity: 1,
       y: '0%',
       duration: 0.5,
+      delay: 1.5,
       ease: 'power3.out',
     }
   )

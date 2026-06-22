@@ -34,12 +34,17 @@ onMounted(() => {
 
     gsap.to(loader.value, {
       duration: 1,
-      delay: 3.5,
-      ease: 'power3.out',
-      height: 0,
+      delay: 4,
+      ease: 'slow',
+      opacity: 0,
+      onStart: () => {
+        onAnimationComplete()
+      },
       onComplete: () => {
         document.documentElement.style.overflow = ''
-        onAnimationComplete()
+        if (loader.value) {
+          loader.value.style.display = 'none'
+        }
       },
     })
   }

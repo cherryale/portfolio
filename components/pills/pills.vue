@@ -10,7 +10,7 @@ defineProps<{
     <li
       v-for="(item, index) in items"
       :key="item.value"
-      class="min-w-22 text-cherry text-base flex items-center justify-center bg-white rounded-full relative py-3 px-7 md:py-6 md:px-14"
+      class="min-w-22 text-cherry text-base flex items-center justify-center bg-light rounded-full relative py-3 px-7 md:py-6 md:px-14"
     >
       <span
         :class="
