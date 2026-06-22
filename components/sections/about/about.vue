@@ -21,7 +21,7 @@ const SKILLS: { value: string; highlighted: boolean }[] = [
 </script>
 
 <template>
-  <Section class="bg-white z-1">
+  <Section class="bg-background z-1">
     <Container>
       <SectionTitle :eyebrow="'About me'" :title="'Tech stack & skills'" />
       <Pills :items="SKILLS" />

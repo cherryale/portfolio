@@ -32,42 +32,22 @@
   /* CONSTANT COLORS */
   /* Stay the same across theme variant and dark/light mode */
   --color-white: #fff;
+  --color-black: #575757;
   --color-accent: #fe5367;
   --color-accent-dark: #db5259;
 
   /* LIGHT MODE */
   --color-cherry: #831c2e;
-  --color-cherry-10: #eadadd;
-  --color-cherry-20: #dec5c9;
-  --color-cherry-40: #c79ba2;
-  --color-cherry-70: #a55b68;
+  --color-cherry-10: #fff7f8;
+  --color-cherry-20: #f7ced1;
+  --color-cherry-40: #de7581;
+  --color-cherry-70: #a9404e;
 
-  --color-black: #373737;
-  --color-foreground: var(--color-cherry);
-  --color-background: #eadadd;
+  --color-foreground: var(--color-black);
+  --color-background: #f9eeef;
 
   --color-green: #a6d36f;
   --color-green-dark: #709049;
-
-  /* ===================================
-  BRANDING COLORS
-  ==================================
-  This website supports 3 theme variants (pink, blue and lilac); each variant
-  has a light and dark mode */
-
-  /* Default variant - Pink (Light mode) */
-  /* --color-pink-100: #f5eff0;
-  --color-pink-200: #f0d9db;
-  --color-pink-300: #d9b3b6;
-  --color-pink-400: #b14b58;
-  --color-pink-500: #831c2e; */
-
-  /* Default variant - Pink (Dark mode) */
-  --color-red-100: #fdd5d9;
-  --color-red-200: #de7581;
-  --color-red-300: #882f3b;
-  --color-red-400: #5a051a;
-  --color-red-500: #370012;
 
   /* Breakpoints */
   --breakpoint-sm: 576px;
@@ -98,11 +78,64 @@
 
 /* Dark theme */
 [data-theme='dark'] {
-  --color-cherry-100: var(--color-red-500);
-  --color-cherry-200: var(--color-red-400);
-  --color-cherry-300: var(--color-red-300);
-  --color-cherry-400: var(--color-red-200);
-  --color-cherry-500: var(--color-red-100);
+  /* CONSTANT COLORS */
+  /* Stay the same across theme variant and dark/light mode */
+  /* --color-accent: #db5259;
+  --color-accent-dark: #fe5367; */
+
+  /* LIGHT MODE */
+  --color-cherry: #f3c2cf;
+  --color-cherry-10: #dec5c9;
+  --color-cherry-20: #c79ba2;
+  --color-cherry-40: #af526a;
+  --color-cherry-70: #a55d6a;
+
+  --color-green: #a6d36f;
+  --color-green-dark: #709049;
+
+  --color-foreground: #dec3c7;
+  --color-background: #280408;
+
+  .animate-pill-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1),
+      var(--color-cherry-40),
+      var(--color-accent),
+      rgba(255, 255, 255, 0.1)
+    );
+    background-size: 200% 100%;
+    animation: pill-shimmer 2s ease-in-out infinite;
+    animation-direction: alternate;
+  }
+
+  .animate-pill-shimmer-reverse {
+    background: linear-gradient(
+      45deg,
+      var(--color-cherry-40),
+      rgba(255, 255, 255, 0.1),
+      var(--color-accent),
+      rgba(255, 255, 255, 0.1),
+      var(--color-accent),
+      rgba(255, 255, 255, 0.1)
+    );
+    background-size: 200% 100%;
+    animation: pill-shimmer 3s ease-in-out infinite;
+    animation-direction: alternate-reverse;
+  }
+
+  .animate-experience-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-accent),
+      rgba(255, 255, 255, 0.1),
+      var(--color-accent),
+      rgba(255, 255, 255, 0.1),
+      var(--color-accent)
+    );
+    background-size: 200% 200%;
+    animation: experience-shimmer 5s ease-in-out infinite;
+  }
 }
 
 @layer base {
@@ -191,6 +224,18 @@
 }
 
 @layer utilities {
+  .drop-shadow {
+    box-shadow: 0 0 20px rgba(131, 28, 48, 0.08);
+  }
+
+  .bg-texture {
+    background-image: url('/assets/images/png/texture.png');
+  }
+
+  [data-theme='dark'] .bg-texture {
+    background-image: url('/assets/images/png/texture-dark.png');
+  }
+
   .bg-linear-tr {
     background: linear-gradient(
       to top right,
@@ -232,25 +277,41 @@
 .animate-pill-shimmer {
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.15),
-    var(--color-cherry-40),
     var(--color-accent),
-    rgba(0, 0, 0, 0.15)
+    var(--color-white),
+    var(--color-accent)
   );
   background-size: 200% 100%;
-  animation: pill-shimmer 1s ease-in-out infinite;
+  animation: pill-shimmer 2s ease-in-out infinite;
   animation-direction: alternate;
 }
 
 .animate-pill-shimmer-reverse {
   background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.15),
-    var(--color-cherry-40),
+    45deg,
+    var(--color-white),
     var(--color-accent),
-    rgba(0, 0, 0, 0.15)
+    var(--color-white),
+    var(--color-accent),
+    var(--color-white)
   );
-  background-size: 200% 100%;
+  background-size: 250% 200%;
+  animation: pill-shimmer 3s ease-in-out infinite;
+  animation-direction: alternate-reverse;
+}
+
+.animate-status-shimmer {
+  background: linear-gradient(
+    45deg,
+    var(--color-green),
+    var(--color-green),
+    var(--color-green),
+    var(--color-white),
+    var(--color-green),
+    var(--color-green),
+    var(--color-green)
+  );
+  background-size: 400% 400%;
   animation: pill-shimmer 1s ease-in-out infinite;
   animation-direction: alternate-reverse;
 }
@@ -259,24 +320,26 @@
   0% {
     background-position: 0% 0%;
   }
-  50% {
+  100% {
     background-position: 100% 100%;
   }
-  100% {
+  /* 100% {
     background-position: 0% 0%;
-  }
+  } */
 }
 
 .animate-experience-shimmer {
   background: linear-gradient(
     to top left,
     var(--color-accent),
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15),
+    var(--color-accent),
+    var(--color-white),
+    var(--color-accent),
     var(--color-accent)
   );
   background-size: 200% 200%;
-  animation: experience-shimmer 2s ease-in-out infinite;
+  animation: experience-shimmer 5s ease-in-out infinite;
+  animation-direction: alternate-reverse;
 }
 
 @keyframes float {
@@ -303,11 +366,5 @@
 
   strong {
     @apply text-accent;
-  }
-}
-
-@media (min-width: 1150px) {
-  .mobile-only {
-    display: none !important;
   }
 }

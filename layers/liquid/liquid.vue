@@ -52,8 +52,8 @@ const theme: ThemeState = {
 
 // ✅ Track all CSS vars that affect your canvas/text colors
 const getThemeSignature = () => {
-  const bg = getCSSVariables('--color-cherry-100')
-  const text = getCSSVariables('--color-cherry-500')
+  const bg = getCSSVariables('--color-background')
+  const text = getCSSVariables('--color-cherry')
   return `${bg}|${text}`
 }
 
@@ -337,7 +337,6 @@ onMounted(async () => {
 
     resizeObserver = new ResizeObserver(handleResize)
     resizeObserver.observe(containerRef.value)
-
   }
   tick()
 })

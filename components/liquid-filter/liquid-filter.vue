@@ -20,7 +20,7 @@ onMounted(() => {
   if (!turbulence.value) return
   flowTween = gsap.fromTo(
     turbulence.value,
-    { attr: { baseFrequency: '0 0' } },
+    { attr: { baseFrequency: '0.002 0.002' } },
     {
       attr: { baseFrequency: '0.012 0.008' },
       duration: props.duration,
