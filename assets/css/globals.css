@@ -32,6 +32,7 @@
   /* CONSTANT COLORS */
   /* Stay the same across theme variant and dark/light mode */
   --color-white: #fff;
+  --color-light: #fff;
   --color-black: #575757;
   --color-accent: #fe5367;
   --color-accent-dark: #db5259;
@@ -80,8 +81,7 @@
 [data-theme='dark'] {
   /* CONSTANT COLORS */
   /* Stay the same across theme variant and dark/light mode */
-  /* --color-accent: #db5259;
-  --color-accent-dark: #fe5367; */
+  --color-light: #3e1d21;
 
   /* LIGHT MODE */
   --color-cherry: #f3c2cf;

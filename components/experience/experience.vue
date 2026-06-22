@@ -19,8 +19,8 @@ defineProps<{
       v-for="(item, index) in items"
       :class="
         classNames(
-          'bg-white rounded-4xl sm:rounded-full py-5 sm:py-10 px-5 sm:px-14 relative',
-          highlighted ? 'bg-white' : 'bg-white/70'
+          'bg-light rounded-4xl sm:rounded-full py-5 sm:py-10 px-5 sm:px-14 relative',
+          highlighted ? 'bg-light' : 'bg-light/70'
         )
       "
     >
