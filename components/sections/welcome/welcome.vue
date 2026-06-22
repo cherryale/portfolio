@@ -61,7 +61,7 @@ watch(isAnimationComplete, (done) => {
         :size="'default'"
         :text="'Say hello'"
         :colors="{
-          slash: 'var(--color-accent-dark)',
+          slash: 'var(--color-cherry-40)',
           arrow: 'var(--color-accent)',
           text: 'text-cherry',
         }"
