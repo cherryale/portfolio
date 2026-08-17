@@ -5,7 +5,6 @@ import Liquid from '~/layers/liquid/liquid.vue'
 const { t } = useI18n()
 const { isDesktop, isMobile } = useMediaQueries()
 const { parse } = useMarkdown()
-const { isAnimationComplete } = useLoader()
 
 const content = ref<HTMLElement | null>(null)
 const elements = ref<HTMLElement | null>(null)
@@ -30,10 +29,8 @@ const animate = () => {
   )
 }
 
-watch(isAnimationComplete, (done) => {
-  if (done) {
-    animate()
-  }
+onMounted(() => {
+  animate()
 })
 </script>
 

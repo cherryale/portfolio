@@ -22,8 +22,6 @@ const track2 = ref<HTMLElement | null>(null)
 let tween: gsap.core.Tween
 let tween2: gsap.core.Tween
 
-const { isAnimationComplete } = useLoader()
-
 const section = ref<{ el: HTMLElement | null } | null>(null)
 const animate = () => {
   if (section.value?.el) {
@@ -41,13 +39,9 @@ const animate = () => {
   }
 }
 
-watch(isAnimationComplete, (done) => {
-  if (done) {
-    animate()
-  }
-})
-
 onMounted(() => {
+  animate()
+
   const el = track.value!
   const halfWidth = el.scrollWidth / 2
   tween = gsap.to(el, {

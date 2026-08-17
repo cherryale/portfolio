@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Loader from '~/components/loader/loader.vue'
 import About from '~/components/sections/about/about.vue'
 import Footer from '~/components/footer/footer.vue'
 import Welcome from '~/components/sections/welcome/welcome.vue'
@@ -10,7 +9,6 @@ definePageMeta({
 })
 </script>
 <template>
-  <Loader />
   <Welcome />
   <Work />
   <About />
