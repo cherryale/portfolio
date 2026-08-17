@@ -10,6 +10,13 @@
   },
   "projects": [
     {
+      "name": "Sunshine Delights",
+      "description": "Official website",
+      "stack": "Sanity CMS · React · Next.js · Tailwind · Next.js",
+      "image": "/assets/images/projects/sunshine.png",
+      "url": "https://sunshinedelights.com/"
+    },
+    {
       "name": "DRLAB",
       "description": "E-Commerce",
       "stack": "Figma · Shopify · Liquid",
@@ -31,18 +38,18 @@
       "url": "https://www.norwegianfilm.com/"
     },
     {
-      "name": "Vilcek Foundation",
-      "description": "Official website",
-      "stack": "Wordpress · HTML/CSS · Javascript · Twig",
-      "image": "/assets/images/projects/vilcek.png",
-      "url": "https://vilcek.org/"
-    },
-    {
       "name": "Jé St Sume",
       "description": "Personal website",
       "stack": "Figma · Sanity CMS · Next.js · React · Tailwind",
       "image": "/assets/images/projects/je-st-sume.png",
       "url": "https://jéstsume.com/"
+    },
+    {
+      "name": "Vilcek Foundation",
+      "description": "Official website",
+      "stack": "Wordpress · HTML/CSS · Javascript · Twig",
+      "image": "/assets/images/projects/vilcek.png",
+      "url": "https://vilcek.org/"
     },
     {
       "name": "Colorado WIC",
