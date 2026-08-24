@@ -6,11 +6,10 @@ import ThemeToggle from '~/components/theme-toggle/theme-toggle.vue'
 
 const { t } = useI18n()
 
-const { isAnimationComplete } = useLoader()
 const header = ref<HTMLElement | null>(null)
 
-const animate = (done?: boolean) => {
-  if (!done || !header.value) {
+const animate = () => {
+  if (!header.value) {
     return
   }
 
@@ -26,7 +25,7 @@ const animate = (done?: boolean) => {
     }
   )
 }
-watch(isAnimationComplete, (done) => animate(done))
+onMounted(() => animate())
 </script>
 
 <template>

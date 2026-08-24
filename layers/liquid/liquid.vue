@@ -108,12 +108,12 @@ const addTextToScene = async () => {
       [
         { text: 'I am a' },
         {
-          text: ' senior web developer',
+          text: ' passionate UI designer',
           color: getCSSVariables('--color-accent'),
         },
         { text: ' &\n', color: getCSSVariables('--color-cherry') },
         {
-          text: 'casual UI designer',
+          text: 'senior web developer',
           color: getCSSVariables('--color-accent'),
         },
         { text: '.\n', color: getCSSVariables('--color-cherry') },
